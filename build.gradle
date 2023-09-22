@@ -32,7 +32,16 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'com.h2database:h2'
-    //runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+
+    // Spring Boot Devtools 설정
+    // 제공하는 대표적인 기능들
+    // Automatic Restart : classpath에 있는 파일이 변경될 때마다 애플리케이션을 자동 재시작
+    // Live Reload : 정적 자원(html, css, js) 수정 시 새로 고침 없이 바로 적용
+    // Property Defaults : Thymeleaf는 기본적으로 성능을 향상시키기 위해 캐싱 기능을 사용
+    // 하지만 개발 과정에서는 수정한 소스가 제대로 반영되지 않을 수 있기에 cache의 기본값을 false 지정
+    runtimeOnly 'org.springframework.boot:spring-boot-devtools'
+    
     annotationProcessor 'org.projectlombok:lombok'
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
