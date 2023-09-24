@@ -21,13 +21,22 @@ public class SecurityConfig {
 
     // http 요청에 대한 보안을 설정합니다.
     // 페이지 권한 설정, 로그인 페이지 설정, 로그아웃 메소드 등에 대한 설정 작성
+    // SecurityFilterChain는 반환 값이 있고 @Bean으로 등록함으로써 컴포넌트 기반의 보안 설정 가능
     @Bean
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                // .csrf(이곳에 CSRF 설정을 위한 함수)
                 .csrf(AbstractHttpConfigurer::disable)
+
+                // .sessionManagement(이곳에 세션 설정을 위한 함수)
+                // session 사용하지 않으므로 무상태설정
                 .sessionManagement((sessionManagement) ->
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
+
+                // .authorizeHttpRequest(이곳에 인가 설정을 위한 함수);
+                // http.authorizeRequests() : 보안 설정을 하겠다는 의미,
+                // http.anyRequest.permitAll() : 어떠한 요청에도 인증을 요구한다는 의미
                 .authorizeHttpRequests((authorizeRequests) ->
                         authorizeRequests.anyRequest().permitAll()
                 );
