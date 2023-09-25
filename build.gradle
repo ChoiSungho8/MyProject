@@ -29,6 +29,9 @@ dependencies {
     // security 의존성 추가
     implementation 'org.springframework.boot:spring-boot-starter-security'
 
+    // 회원 가입 페이지에서 서버로 넘어오는 값을 검증하기 위함
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'

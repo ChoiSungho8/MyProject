@@ -1,6 +1,10 @@
 package org.zerock.shop.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.shop.entity.Member;
@@ -15,7 +19,8 @@ import org.zerock.shop.repository.MemberRepository;
 // 빈에 생성자가 1개이고 생성자의 파라미터 타입이 빈으로 등록이 가능하다면
 // @Autowired 없이 의존성 주입 가능
 @RequiredArgsConstructor
-public class MemberService {
+// MemberService가 UserDetailService를 구현
+public class MemberService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
 
@@ -30,6 +35,25 @@ public class MemberService {
             // 이미 가입된 회원의 경우 IllegalStateException 예외 발생
             throw new IllegalStateException("이미 가입된 회원입니다.");
         }
+    }
+
+    @Override
+    // UserDetailService 인터페이스의 loadUserByUsername() 메소드를 오버라이딩
+    // 로그인 할 유저의 email을 파라미터로 전달 받음
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Member member = memberRepository.findByEmail(email);
+
+        if (member == null) {
+            throw new UsernameNotFoundException(email);
+        }
+
+        // UserDetail을 구현하고 있는 User 객체를 반환
+        // User 객체를 생성하기 위해서 생성자로 회원의 이메일, 비밀번호, role을 파라미터로 넘겨줌.
+        return User.builder()
+                .username(member.getEmail())
+                .password(member.getPassword())
+                .roles(member.getRole().toString())
+                .build();
     }
 
 }
