@@ -27,7 +27,7 @@ public class CartTest {
     @Autowired
     MemberRepository memberRepository;
 
-    @Autowired
+    @Autowired // 해당 변수 및 메서드에 스프링이 관리하는 Bean을 자동으로 매핑해주는 개념
     PasswordEncoder passwordEncoder;
 
     @PersistenceContext // EntityManager를 Bean으로 주입할 때 씀

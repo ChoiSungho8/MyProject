@@ -6,14 +6,12 @@ import lombok.Setter;
 import lombok.ToString;
 import org.zerock.shop.constant.ItemSellStatus;
 
-import java.time.LocalDateTime;
-
 @Entity
 @Table(name="item")
 @Getter
 @Setter
 @ToString
-public class Item {
+public class Item extends BaseEntity {
 
     @Id
     @Column(name="item_id")
@@ -37,8 +35,8 @@ public class Item {
     @Enumerated(EnumType.STRING) // enum 이름을 DB에 저장
     private ItemSellStatus itemSellStatus; // 상품 판매 상태
 
-    private LocalDateTime regTime; // 등록 시간
+    //private LocalDateTime regTime; // 등록 시간
 
-    private LocalDateTime updateTime; // 수정 시간
+    //private LocalDateTime updateTime; // 수정 시간
 
 }

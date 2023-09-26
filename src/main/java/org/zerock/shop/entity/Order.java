@@ -13,7 +13,7 @@ import java.util.List;
 @Getter @Setter
 // 정렬할 때 사용하는 "order" 키워드가 있기 때문에 "orders"로 지정
 @Table(name = "orders")
-public class Order {
+public class Order extends BaseEntity {
 
     @Id @GeneratedValue
     @Column
@@ -44,8 +44,8 @@ public class Order {
     // 하나의 주문이 여러 개의 주문 상품을 갖으므로 List 자료형을 사용해서 매핑
     private List<OrderItem> orderItems = new ArrayList<>();
 
-    private LocalDateTime regTime;
+    //private LocalDateTime regTime;
 
-    private LocalDateTime updateTime;
+    //private LocalDateTime updateTime;
 
 }
