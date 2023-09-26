@@ -28,57 +28,26 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        http.formLogin()
+        http.formLogin(formLogin -> formLogin
                 .loginPage("/members/login")
                 .defaultSuccessUrl("/")
                 .usernameParameter("email")
-                .failureUrl("/members/login/error")
-                .and()
-                .logout()
+                .failureUrl("/members/login/error"));
+
+        http.logout(logout -> logout
                 .logoutRequestMatcher(new AntPathRequestMatcher("/members/logout"))
-                .logoutSuccessUrl("/")
-        ;
-
-        http
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(
-                                new AntPathRequestMatcher("/"),
-                                new AntPathRequestMatcher("/members/**"),
-                                new AntPathRequestMatcher("/item/**"),
-                                new AntPathRequestMatcher("/images/**")
-                        ).permitAll()
-                        .requestMatchers(new AntPathRequestMatcher("/admin/**")).hasRole("ADMIN")
-                        .anyRequest().authenticated());
-
-        http.exceptionHandling()
-                .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
-        ;
-
-        return http.build();
-
-
-        /*http.formLogin()
-                .loginPage("/members/login")
-                .defaultSuccessUrl("/")
-                .usernameParameter("email")
-                .failureUrl("/members/login/error")
-                .and()
-                .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/members/logout"))
-                .logoutSuccessUrl("/")
-        ;
+                .logoutSuccessUrl("/"));
 
         http.authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/", "/members/**", "/item/**", "/images/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .anyRequest().denyAll()
+                        .anyRequest().authenticated()
         );
 
-        http.exceptionHandling()
-                .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
-        ;
+        http.exceptionHandling(exceptionHandling -> exceptionHandling
+                .authenticationEntryPoint(new CustomAuthenticationEntryPoint()));
 
-        return http.build();*/
+        return http.build();
 
        /* http
                 // .csrf(이곳에 CSRF 설정을 위한 함수)
@@ -100,12 +69,10 @@ public class SecurityConfig {
         return http.build();*/
     }
 
+    // static 디렉터리의 하위 파일은 인증을 무시하도록 설정
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring()
-                .requestMatchers(new AntPathRequestMatcher( "/css/**"))
-                .requestMatchers(new AntPathRequestMatcher( "/js/**"))
-                .requestMatchers(new AntPathRequestMatcher( "/img/**"));
+        return (web) -> web.ignoring().requestMatchers("/css/**", "/js/**", "/img/**");
     }
 
     // BCryptPasswordEncoder의 해시 함수를 이용하여 비밀번호를 암호화하여 저장
