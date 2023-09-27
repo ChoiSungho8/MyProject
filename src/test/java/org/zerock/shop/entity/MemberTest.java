@@ -45,7 +45,6 @@ public class MemberTest {
         Member member = memberRepository.findById(newMember.getId())
                 .orElseThrow(EntityNotFoundException::new);
         // id를 가져오지 못하면(값이 없으면) 예외처리 하겠다.
-
         System.out.println("register time : " + member.getRegTime());
         System.out.println("update time : " + member.getUpdateTime());
         System.out.println("create member : " + member.getCreatedBy());
