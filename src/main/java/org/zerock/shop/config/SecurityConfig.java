@@ -1,10 +1,7 @@
 package org.zerock.shop.config;
 
-import jakarta.servlet.DispatcherType;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -13,14 +10,29 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.zerock.shop.service.MemberService;
 
 @Configuration
 @EnableWebSecurity // SpringSecurityFilterChain이 자동으로 포함
 public class SecurityConfig {
 
-    @Autowired
-    MemberService memberService;
+    /*@Autowired
+    MemberService memberService;*/
+
+    // BCryptPasswordEncoder의 해시 함수를 이용하여 비밀번호를 암호화하여 저장
+    @Bean
+    PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    // static 디렉터리의 하위 파일은 인증을 무시하도록 설정
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring()
+                .requestMatchers(new AntPathRequestMatcher("/h2-console/**"))
+                .requestMatchers(new AntPathRequestMatcher( "/css/**"))
+                .requestMatchers(new AntPathRequestMatcher( "/js/**"))
+                .requestMatchers(new AntPathRequestMatcher( "/img/**"));
+    }
 
     // http 요청에 대한 보안을 설정합니다.
     // 페이지 권한 설정, 로그인 페이지 설정, 로그아웃 메소드 등에 대한 설정 작성
@@ -32,11 +44,10 @@ public class SecurityConfig {
                 .loginPage("/members/login")
                 .defaultSuccessUrl("/")
                 .usernameParameter("email")
-                .failureUrl("/members/login/error"));
-
-        http.logout(logout -> logout
-                .logoutRequestMatcher(new AntPathRequestMatcher("/members/logout"))
-                .logoutSuccessUrl("/"));
+                .failureUrl("/members/login/error"))
+                .logout(logout -> logout
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/members/logout"))
+                        .logoutSuccessUrl("/"));
 
         http.authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/", "/members/**", "/item/**", "/images/**").permitAll()
@@ -44,6 +55,7 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
         );
 
+        // 인증 되지 않은 사용자가 리소스에 접근하였을 대 수행되는 핸들러를 등록합니다.
         http.exceptionHandling(exceptionHandling -> exceptionHandling
                 .authenticationEntryPoint(new CustomAuthenticationEntryPoint()));
 
@@ -67,18 +79,6 @@ public class SecurityConfig {
                 );
 
         return http.build();*/
-    }
-
-    // static 디렉터리의 하위 파일은 인증을 무시하도록 설정
-    @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers("/css/**", "/js/**", "/img/**");
-    }
-
-    // BCryptPasswordEncoder의 해시 함수를 이용하여 비밀번호를 암호화하여 저장
-    @Bean
-    PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
     }
 
 }
