@@ -41,7 +41,7 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
-    compile 'com.h2database:h2'
+    runtimeOnly  'com.h2database:h2'
 
     // Spring Boot Devtools 설정
     // 제공하는 대표적인 기능들

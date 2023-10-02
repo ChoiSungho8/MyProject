@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.zerock.shop.constant.ItemSellStatus;
+import org.zerock.shop.dto.ItemFormDto;
 
 @Entity
 @Table(name="item")
@@ -38,5 +39,14 @@ public class Item extends BaseEntity {
     //private LocalDateTime regTime; // 등록 시간
 
     //private LocalDateTime updateTime; // 수정 시간
+
+    public void updateItem(ItemFormDto itemFormDto) {
+        this.itemNm = itemFormDto.getItemNm(); // 상품 이름
+        this.price = itemFormDto.getPrice(); // 상품 가격
+        this.stockNumber = itemFormDto.getStockNumber(); // 상품 재고 수량
+        this.itemDetail = itemFormDto.getItemDetail(); // 상품 상세 설명
+        this.itemSellStatus = itemFormDto.getItemSellStatus();
+        // 상품 현재 상태(SELL : 판매중, SOLD_OUT : 매진)
+    }
 
 }
