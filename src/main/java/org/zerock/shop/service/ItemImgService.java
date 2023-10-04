@@ -12,7 +12,7 @@ import org.zerock.shop.repository.ItemImgRepository;
 
 // 상품 이미지를 업로드하고, 상품 이미지 정보를 저장
 @Service
-// 생성자 자동 주입, final 이나 @NotNull이 붙은 필드의 생성자를 자동으로 만들어 준다.
+// 생성자 자동 주입, final 이나 @NonNull이 붙은 필드의 생성자를 자동으로 만들어 준다.
 @RequiredArgsConstructor
 @Transactional // 모든 연산이 성공하면 커밋(작업 확정), 아닐 시 롤백(작업 취소)
 public class ItemImgService {

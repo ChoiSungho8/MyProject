@@ -3,6 +3,9 @@ package org.zerock.shop.controller;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,12 +15,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.zerock.shop.dto.ItemFormDto;
+import org.zerock.shop.dto.ItemSearchDto;
+import org.zerock.shop.entity.Item;
 import org.zerock.shop.service.ItemService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
-@RequiredArgsConstructor // final이나 @NotNull이 있는 필드의 생성자 자동 생성
+@RequiredArgsConstructor // final이나 @NonNull이 있는 필드의 생성자 자동 생성
 public class ItemController {
 
     // 상품을 등록하는 url을 ItemController에 추가
@@ -113,6 +119,40 @@ public class ItemController {
 
         return "redirect:/";
 
+    }
+
+    // 상품 관리 화면 이동 및 조회한 상품 데이터를 화면에 전달하는 로직을 구현
+    // 현재 상품 데이터가 많이 없는 관계로 한 페이지당 총 3개의 상품만 보여주도록 하겠습니다.
+    // 페이지 번호는 0부터 시작하는 것에 유의
+    // value에 상품 관리 화면 진입 시 URL에 페이지 번호가 없는 경우와 페이지 번호가 있는 경우 2가지를 매핑
+    @GetMapping(value = {"/admin/items", "/admin/items/{page}"})
+    public String itemManage(ItemSearchDto itemSearchDto, @PathVariable("page") Optional<Integer> page,
+                             Model model) {
+
+        // 페이징을 위해서 PageRequest.of 메소드를 통해 Pageable 객체를 생성
+        // 첫 번째 파라미터로는 조회할 페이지 번호, 두 번째 파라미터로는 한 번에 가지고 올 데이터 수를 넣어줍니다.
+        // URL 경로에 페이지 번호가 있으면 해당 페이지를 조회하도록 세팅하고, 페이지 번호가 없으면 0페이지를 조회
+        // .isPresent() 있으면 true 없으면 false
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 3);
+
+        // 조회 조건과 페이징 정보를 파라미터로 넘겨서 Page<Item> 객체를 반환 받습니다.
+        Page<Item> items = itemService.getAdminItemPage(itemSearchDto, pageable);
+        // 조회한 상품 데이터 및 페이징 정보를 뷰에 전달합니다.
+        model.addAttribute("items", items);
+        // 페이지 전환 시 기존 검색 조건을 유지한 채 이동할 수 있도록 뷰에 다시 전달합니다.
+        model.addAttribute("itemSearchDto", itemSearchDto);
+        // 상품 관리 메뉴 하단에 보여줄 페이지 번호의 최대 개수입니다.
+        // 5로 설정했으므로 최대 5개의 이동할 페이지 번호만 보여줍니다.
+        model.addAttribute("maxPage", 5);
+        return "item/itemMng";
+
+    }
+
+    @GetMapping(value = "/item/{itemId}")
+    public String itemDtl(Model model, @PathVariable("itemId") Long itemId) {
+        ItemFormDto itemFormDto = itemService.getItemDtl(itemId);
+        model.addAttribute("item", itemFormDto);
+        return "item/itemDtl";
     }
 
 }

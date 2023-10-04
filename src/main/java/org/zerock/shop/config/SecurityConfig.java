@@ -27,9 +27,10 @@ public class SecurityConfig {
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web.ignoring()
-                .requestMatchers(new AntPathRequestMatcher( "/css/**"))
-                .requestMatchers(new AntPathRequestMatcher( "/js/**"))
-                .requestMatchers(new AntPathRequestMatcher( "/img/**"));
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**"))
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/css/**"))
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/js/**"))
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/img/**"));
     }
 
     // http 요청에 대한 보안을 설정합니다.
@@ -44,12 +45,15 @@ public class SecurityConfig {
                 .usernameParameter("email")
                 .failureUrl("/members/login/error"))
                 .logout(logout -> logout
-                        .logoutRequestMatcher(new AntPathRequestMatcher("/members/logout"))
+                        .logoutRequestMatcher(AntPathRequestMatcher.antMatcher("/members/logout"))
                         .logoutSuccessUrl("/"));
 
         http.authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/", "/members/**", "/item/**", "/images/**").permitAll()
-                .requestMatchers("/admin/**").hasRole("ADMIN")
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/")).permitAll()
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/members/**")).permitAll()
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/item/**")).permitAll()
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/images/**")).permitAll()
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/admin/**")).hasRole("ADMIN")
                 .anyRequest().authenticated()
         );
 

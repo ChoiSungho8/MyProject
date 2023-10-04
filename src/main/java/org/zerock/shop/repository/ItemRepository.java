@@ -9,7 +9,7 @@ import org.zerock.shop.entity.Item;
 import java.util.List;
 
 public interface ItemRepository extends JpaRepository<Item, Long>,
-        QuerydslPredicateExecutor<Item> {
+        QuerydslPredicateExecutor<Item>, ItemRepositoryCustom {
     // JpaRepository는 기본적인 CRUD 및 페이징 처리를 위한 메소드가 정의 되어 있다.
 
     // itemNm(상품명)으로 데이터를 조회, 엔티티명은 생략이 가능(findItemByItemNm)

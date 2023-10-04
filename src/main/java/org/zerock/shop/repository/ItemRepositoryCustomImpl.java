@@ -11,8 +11,11 @@ import org.springframework.data.domain.Pageable;
 import org.thymeleaf.util.StringUtils;
 import org.zerock.shop.constant.ItemSellStatus;
 import org.zerock.shop.dto.ItemSearchDto;
+import org.zerock.shop.dto.MainItemDto;
+import org.zerock.shop.dto.QMainItemDto;
 import org.zerock.shop.entity.Item;
 import org.zerock.shop.entity.QItem;
+import org.zerock.shop.entity.QItemImg;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -103,6 +106,51 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
         // 조회한 데이터를 Page 클래스의 구현체인 PageImpl 객체로 반환합니다.
         return new PageImpl<>(content, pageable, total);
 
+    }
+    
+    // 검색어가 null이 아니면 상품명에 해당 검색어가 포함되는 상품을 조회하는 조건을 반환
+    private BooleanExpression itemNmLike(String searchQuery) {
+        return StringUtils.isEmpty(searchQuery) ? null : QItem.item.itemNm.like("%" + searchQuery + "%");
+    }
+
+    @Override
+    public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto, Pageable pageable) {
+
+        QItem item = QItem.item;
+        QItemImg itemImg = QItemImg.itemImg;
+
+        List<MainItemDto> content = queryFactory
+                .select(
+                        // QMainItemDto의 생성자에 반환할 값들을 넣어줍니다.
+                        // @QueryProjection을 사용하면 DTO로 바로 조회가 가능합니다.
+                        // 엔티티 조회 후 DTO로 변환하는 과정을 줄일 수 있습니다.
+                        new QMainItemDto(
+                                item.id,
+                                item.itemNm,
+                                item.itemDetail,
+                                itemImg.imgUrl,
+                                item.price)
+                )
+                .from(itemImg)
+                .join(itemImg.item, item) // itemImg와 item을 내부 조인합니다.
+                .where(itemImg.repimgYn.eq("Y")) // 상품 이미지의 경우 대표 상품 이미지만 불러옵니다.
+                .where(itemNmLike(itemSearchDto.getSearchQuery()))
+                .orderBy(item.id.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
+
+        // Wildcard.count = count(*)
+        // fetchOne() : 조회 대상이 1건이면 해당 타입 반환, 1건 이상이면 에러 발생
+        long total = queryFactory
+                .select(Wildcard.count)
+                .from(itemImg)
+                .join(itemImg.item, item)
+                .where(itemImg.repimgYn.eq("Y"))
+                .where(itemNmLike(itemSearchDto.getSearchQuery()))
+                .fetchOne();
+
+        return new PageImpl<>(content, pageable, total);
     }
 
 }

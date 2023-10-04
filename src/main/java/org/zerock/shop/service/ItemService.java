@@ -2,11 +2,15 @@ package org.zerock.shop.service;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.zerock.shop.dto.ItemFormDto;
 import org.zerock.shop.dto.ItemImgDto;
+import org.zerock.shop.dto.ItemSearchDto;
+import org.zerock.shop.dto.MainItemDto;
 import org.zerock.shop.entity.Item;
 import org.zerock.shop.entity.ItemImg;
 import org.zerock.shop.repository.ItemImgRepository;
@@ -17,7 +21,7 @@ import java.util.List;
 
 @Service
 @Transactional // 성공하면 커밋, 실패하면 롤백
-@RequiredArgsConstructor // final이나 @NotNull이 있는 필드의 생성자 자동 생성
+@RequiredArgsConstructor // final이나 @NonNull이 있는 필드의 생성자 자동 생성
 public class ItemService {
     // 상품을 등록하는 ItemService 클래스
     
@@ -96,6 +100,20 @@ public class ItemService {
 
         return item.getId();
 
+    }
+
+    // 상품 조회 조건과 페이지 정보를 파라미터로 받아서 상품 데이터를 조회
+    // 데이터의 수정이 일어나지 않으므로 최적화를 위해 @Transactional(readOnly = true) 설정
+    @Transactional(readOnly = true)
+    public Page<Item> getAdminItemPage(ItemSearchDto itemSearchDto, Pageable pageable) {
+        return itemRepository.getAdminItemPage(itemSearchDto, pageable);
+    }
+
+    // 메인 페이지 보여줄 상품 데이터를 조회하는 메소드
+    // 데이터의 수정이 일어나지 않으므로 최적화를 위해 @Transactional(readOnly = true) 설정
+    @Transactional(readOnly = true)
+    public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto, Pageable pageable) {
+        return itemRepository.getMainItemPage(itemSearchDto, pageable);
     }
 
 }
