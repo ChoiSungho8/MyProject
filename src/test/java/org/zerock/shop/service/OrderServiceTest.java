@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.shop.constant.ItemSellStatus;
+import org.zerock.shop.constant.OrderStatus;
 import org.zerock.shop.dto.OrderDto;
 import org.zerock.shop.entity.Item;
 import org.zerock.shop.entity.Member;
@@ -86,6 +87,34 @@ class OrderServiceTest {
         
         // 주문한 상품의 총 가격과 데이터베이스에 저장된 상품의 가격을 비교하여 같으면 테스트가 성공적으로 종료
         assertEquals(totalPrice, order.getTotalPrice());
+    }
+
+    // 주문 취소 로직이 제대로 동작하는지 테스트
+    @Test
+    @DisplayName("주문 취소 테스트")
+    public void cancelOrder() {
+        // 테스트 상품 데이터 생성 (생성한 상품의 재고 100개)
+        Item item = saveItem();
+        // 테스트 회원 데이터 생성
+        Member member = saveMember();
+
+        OrderDto orderDto = new OrderDto();
+        // 주문할 상품과 상품 수량을 orderDto 객체에 세팅
+        orderDto.setCount(10);
+        orderDto.setItemId(item.getId());
+        // 테스트를 위해서 주문 데이터를 생성합니다. 주문 개수는 총 10개입니다.
+        Long orderId = orderService.order(orderDto, member.getEmail());
+
+        // 생성한 주문 엔티티를 조회합니다.
+        Order order = orderRepository.findById(orderId).orElseThrow(EntityNotFoundException::new);
+        // 해당 주문을 취소합니다.
+        orderService.cancelOrder(orderId);
+
+        // 주문의 상태가 취소 상태라면 테스트가 통과합니다.
+        assertEquals(OrderStatus.CANCEL, order.getOrderStatus());
+        // 취소 후 상품의 재고가 처음 재고 개수인 100개와 동일하다면 테스트가 통과합니다.
+        assertEquals(100, item.getStockNumber());
+
     }
 
 }
