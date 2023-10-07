@@ -4,8 +4,11 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.thymeleaf.util.StringUtils;
 import org.zerock.shop.dto.CartDetailDto;
 import org.zerock.shop.dto.CartItemDto;
+import org.zerock.shop.dto.CartOrderDto;
+import org.zerock.shop.dto.OrderDto;
 import org.zerock.shop.entity.Cart;
 import org.zerock.shop.entity.CartItem;
 import org.zerock.shop.entity.Item;
@@ -28,6 +31,8 @@ public class CartService {
     private final MemberRepository memberRepository;
     private final CartRepository cartRepository;
     private final CartItemRepository cartItemRepository;
+
+    private final OrderService orderService;
 
     public Long addCart(CartItemDto cartItemDto, String email) {
 
@@ -82,5 +87,57 @@ public class CartService {
 
     }
 
+    // 장바구니 상품의 수량을 업데이트하는 로직 추가
+    @Transactional(readOnly = true)
+    public boolean validateCartItem(Long cartItemId, String email) {
+        // 현재 로그인한 회원을 조회합니다.
+        Member curMember = memberRepository.findByEmail(email);
+        CartItem cartItem = cartItemRepository.findById(cartItemId).orElseThrow(EntityNotFoundException::new);
+        // 장바구니 상품을 저장한 회원을 조회합니다.
+        Member savedMember = cartItem.getCart().getMember();
+
+        // 현재 로그인한 회원과 장바구니 상품을 저장한 회원이 다를 경우 false를, 같은면 true를 반환합니다.
+        if (!StringUtils.equals(curMember.getEmail(), savedMember.getEmail())) {
+            return false;
+        }
+        return true;
+    }
+
+    public void updateCartItemCount(Long cartItemId, int count) {
+        // 장바구니 상품의 수량을 업데이트하는 메소드
+        CartItem cartItem = cartItemRepository.findById(cartItemId).orElseThrow(EntityNotFoundException::new);
+
+        cartItem.updateCount(count);
+    }
+
+    // 주문 로직으로 전달할 orderDto 리스트 생성 및 주문 로직 호출, 주문한 상품은 장바구니에서 제거하는 로직을 구현
+    public Long orderCartItem(List<CartOrderDto> cartOrderDtoList, String email) {
+        List<OrderDto> orderDtoList = new ArrayList<>();
+        // 장바구니 페이지에서 전달받은 주문 상품 번호를 이용하여 주문 로직으로 전달할 orderDto 객체를 만듭니다.
+        for (CartOrderDto cartOrderDto : cartOrderDtoList) {
+            CartItem cartItem = cartItemRepository
+                    .findById(cartOrderDto.getCartItemId())
+                    .orElseThrow(EntityNotFoundException::new);
+
+            OrderDto orderDto = new OrderDto();
+            orderDto.setItemId(cartItem.getItem().getId());
+            orderDto.setCount(cartItem.getCount());
+            orderDtoList.add(orderDto);
+        }
+
+        // 장바구니에 담은 상품을 주문하도록 주문 로직을 호출합니다.
+        Long orderId = orderService.orders(orderDtoList, email);
+
+        // 주문한 상품들을 장바구니에서 제거합니다.
+        for (CartOrderDto cartOrderDto : cartOrderDtoList) {
+            CartItem cartItem = cartItemRepository
+                    .findById(cartOrderDto.getCartItemId())
+                    .orElseThrow(EntityNotFoundException::new);
+            cartItemRepository.delete(cartItem);
+        }
+
+        return orderId;
+
+    }
 
 }

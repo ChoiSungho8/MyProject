@@ -8,12 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.zerock.shop.dto.CartDetailDto;
 import org.zerock.shop.dto.CartItemDto;
+import org.zerock.shop.dto.CartOrderDto;
 import org.zerock.shop.service.CartService;
 
 import java.security.Principal;
@@ -65,6 +63,51 @@ public class CartController {
         // 조회한 장바구니 상품 정보를 뷰로 전달합니다.
         model.addAttribute("cartItems", cartDetailList);
         return "cart/cartList";
+    }
+
+    // 장바구니 상품의 수량을 업데이트하는 요청을 처리할 수 있도록 로직을 추가
+
+    // HTTP 메소드에서 PATCH는 요청된 자원의 일부를 업데이트할 때 PATCH를 사용합니다.
+    // 장바구니 상품의 수량만 업데이트하기 때문에 @PatchMapping을 사용하겠습니다.
+    @PatchMapping(value = "/cartItem/{cartItemId}")
+    public @ResponseBody ResponseEntity updateCartItem(@PathVariable("cartItemId") Long cartItemId, int count, Principal principal) {
+
+        // 장바구니에 담겨있는 상품의 개수를 0개 이하로 업데이트 요청을 할 때 에러 메시지를 담아서 반환합니다.
+        if (count <= 0) {
+            return new ResponseEntity<String>("최소 1개 이상 담아주세요", HttpStatus.BAD_REQUEST);
+        } else if(!cartService.validateCartItem(cartItemId, principal.getName())) { // 수정 권한을 체크
+            return new ResponseEntity<String>("수정 권한이 없습니다.", HttpStatus.FORBIDDEN);
+        }
+
+        // 장바구니 상품의 개수를 업데이트합니다.
+        cartService.updateCartItemCount(cartItemId, count);
+        return new ResponseEntity<Long>(cartItemId, HttpStatus.OK);
+
+    }
+
+    // 장바구니 상품의 수량을 업데이트하는 요청을 처리할 수 있또록 로직을 추가
+    @PostMapping(value = "/cart/orders")
+    public @ResponseBody ResponseEntity orderCartItem(@RequestBody CartOrderDto cartOrderDto, Principal principal) {
+
+        List<CartOrderDto> cartOrderDtoList = cartOrderDto.getCartOrderDtoList();
+
+        // 주문할 상품을 선택하지 않았는지 체크합니다.
+        if (cartOrderDtoList == null || cartOrderDtoList.size() == 0) {
+            return new ResponseEntity<String>("주문할 상품을 선택해주세요.", HttpStatus.FORBIDDEN);
+        }
+
+        // 주문 권한을 체크합니다.
+        for (CartOrderDto cartOrder : cartOrderDtoList) {
+            if(!cartService.validateCartItem(cartOrder.getCartItemId(), principal.getName())) {
+                return new ResponseEntity<String>("주문 권한이 없습니다.", HttpStatus.FORBIDDEN);
+            }
+        }
+
+        // 주문 로직 호출 결과 생성된 주문 번호를 반환 받습니다.
+        Long orderId = cartService.orderCartItem(cartOrderDtoList, principal.getName());
+        // 생성된 주문 번호와 요청이 성공했다는 HTTP 응답 상태 코드를 반환합니다.
+        return new ResponseEntity<Long>(orderId, HttpStatus.OK);
+
     }
 
 }

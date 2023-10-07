@@ -2,6 +2,7 @@ package org.zerock.shop.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.zerock.shop.dto.CartDetailDto;
 import org.zerock.shop.entity.CartItem;
 
@@ -24,6 +25,6 @@ public interface CartItemRepository extends JpaRepository<CartItem, Long> {
             "from CartItem ci, ItemImg im join ci.item i where ci.cart.id = :cartId " +
             // 장바구니에 담겨있는 상품의 대표 이미지만 가지고 오도록 조건문을 작성합니다.
             "and im.item.id = ci.item.id and im.repimgYn = 'Y' order by ci.regTime desc")
-    List<CartDetailDto> findCartDetailDtoList(Long cartId);
+    List<CartDetailDto> findCartDetailDtoList(@Param("cartId") Long cartId);
 
 }

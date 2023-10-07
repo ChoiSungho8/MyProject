@@ -105,4 +105,33 @@ public class OrderService {
         order.cancelOrder();
     }
 
+    // 장바구니에서 주문할 상품 데이터를 전달받아서 주문을 생성하는 로직을 만듦
+    public Long orders(List<OrderDto> orderDtoList, String email) {
+
+        // 로그인한 회원 이메일을 이용하여 회원 정보를 member 객체에 저장
+        Member member = memberRepository.findByEmail(email);
+        // 주문 상품 목록 객체 생성
+        List<OrderItem> orderItemList = new ArrayList<>();
+
+        // 주문할 상품 리스트를 만들어 줍니다.
+        for (OrderDto orderDto : orderDtoList) {
+            // 주문할 상품의 아이디를 상품 객체에 저장
+            Item item = itemRepository.findById(orderDto.getItemId()).orElseThrow(EntityNotFoundException::new);
+
+            // 상품과 주문 개수를 이용하여 주문할 상품 객체 생성
+            OrderItem orderItem = OrderItem.createOrderItem(item, orderDto.getCount());
+            // 주문할 상품 객체를 주문 상품 리스트에 저장
+            orderItemList.add(orderItem);
+        }
+
+        // 현재 로그인한 회원과 주문 상품 목록을 이용하여 주문 엔티티를 만듭니다.
+        Order order = Order.createOrder(member, orderItemList);
+        // 주문 데이터를 저장합니다.
+        orderRepository.save(order);
+
+        // 주문 번호 반환
+        return order.getId();
+
+    }
+
 }
