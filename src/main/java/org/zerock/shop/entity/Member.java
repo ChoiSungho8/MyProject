@@ -29,6 +29,8 @@ public class Member extends BaseEntity {
 
     private String address;
 
+    private String uuid;
+
     // enum 타입을 엔티티 속성으로 지정
     // Enum 사용 시 순서가 저장되는데, 순서가 바뀔 경우 문제가 발생할 수 있으므로 String 저장 권장
     @Enumerated(EnumType.STRING)
