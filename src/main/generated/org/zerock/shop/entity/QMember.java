@@ -45,8 +45,6 @@ public class QMember extends EntityPathBase<Member> {
     //inherited
     public final DateTimePath<java.time.LocalDateTime> updateTime = _super.updateTime;
 
-    public final StringPath uuid = createString("uuid");
-
     public QMember(String variable) {
         super(Member.class, forVariable(variable));
     }
