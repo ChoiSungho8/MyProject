@@ -29,8 +29,8 @@ public class BoardDto {
     @NotEmpty
     private String writer;
 
-    private LocalDateTime regDate;
+    private LocalDateTime regTime;
 
-    private LocalDateTime modDate;
+    private LocalDateTime updateTime;
 
 }
