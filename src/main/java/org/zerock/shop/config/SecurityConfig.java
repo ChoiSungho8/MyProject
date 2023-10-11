@@ -50,6 +50,7 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(authorize -> authorize
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/")).permitAll()
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/board/**")).permitAll()
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/members/**")).permitAll()
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/item/**")).permitAll()
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/images/**")).permitAll()

@@ -1,5 +1,7 @@
 package org.zerock.shop.dto;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,10 +18,15 @@ public class BoardDto {
 
     private Long bno;
 
+    // 제목, 내용, 작성자가 비어 있지 않도록 @NotEmpty 설정
+    @NotEmpty
+    @Size(min = 3, max = 100)
     private String title;
 
+    @NotEmpty
     private String content;
 
+    @NotEmpty
     private String writer;
 
     private LocalDateTime regDate;

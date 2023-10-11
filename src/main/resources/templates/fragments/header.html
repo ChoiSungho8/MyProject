@@ -23,12 +23,16 @@
                     <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
                         <a class="nav-link" href="/admin/items">상품 관리</a>
                     </li>
-                    <!-- 로그인(인증) 했을 경우에만 보여줌 -->
-                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <!-- 게시판은 아무나 접근 가능 -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/board/list">게시판</a>
+                    </li>
+                    <!-- 로그인(인증, 회원만) 했을 경우에만 보여줌 -->
+                    <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_USER')">
                         <a class="nav-link" href="/cart">장바구니</a>
                     </li>
-                    <!-- 로그인(인증) 했을 경우에만 보여줌 -->
-                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <!-- 로그인(인증, 회원만) 했을 경우에만 보여줌 -->
+                    <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_USER')">
                         <a class="nav-link" href="/orders">구매이력</a>
                     </li>
                     <!-- 로그인하지 않은 상태이면 로그인 메뉴를 보여줌 -->

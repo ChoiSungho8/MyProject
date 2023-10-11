@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.zerock.shop.dto.BoardDto;
+import org.zerock.shop.dto.PageRequestDto;
+import org.zerock.shop.dto.PageResponseDto;
 
 @SpringBootTest // 테스트하기 위한 통합 설정
 @Log4j2 // log 출력
@@ -43,6 +45,23 @@ public class BoardServiceTests {
                 .build();
 
         boardService.modify(boardDto);
+
+    }
+
+    // 목록/검색 기능 확인
+    @Test
+    public void testList() {
+
+        PageRequestDto pageRequestDto = PageRequestDto.builder()
+                .type("tcw")
+                .keyword("1")
+                .page(1)
+                .size(10)
+                .build();
+
+        PageResponseDto<BoardDto> responseDto = boardService.list(pageRequestDto);
+
+        log.info(responseDto);
 
     }
 

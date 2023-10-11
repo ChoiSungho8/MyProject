@@ -41,7 +41,7 @@ dependencies {
     // security 의존성 추가
     implementation 'org.springframework.boot:spring-boot-starter-security'
 
-    // 회원 가입 페이지에서 서버로 넘어오는 값을 검증하기 위함
+    // @Valid를 이용해서 서버에서도 검증한 후에 등록하는 방식을 적용
     implementation 'org.springframework.boot:spring-boot-starter-validation'
 
     // Model Mapper 라이브러리 추가

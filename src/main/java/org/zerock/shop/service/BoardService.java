@@ -1,6 +1,8 @@
 package org.zerock.shop.service;
 
 import org.zerock.shop.dto.BoardDto;
+import org.zerock.shop.dto.PageRequestDto;
+import org.zerock.shop.dto.PageResponseDto;
 
 public interface BoardService {
 
@@ -15,5 +17,8 @@ public interface BoardService {
 
     // 삭제 작업 처리
     void remove(Long bno);
+
+    // list()라는 이름으로 목록/검색 기능을 선언
+    PageResponseDto<BoardDto> list(PageRequestDto pageRequestDto);
 
 }
