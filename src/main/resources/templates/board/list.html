@@ -40,7 +40,6 @@
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">Board List</h5>
-
                     <table class="table">
                         <thead>
                         <tr>
@@ -65,7 +64,6 @@
                     <!-- 페이지 목록의 출력 -->
                     <div class="float-end">
                         <ul class="pagination flex-wrap">
-
                             <li class="page-item" th:if="${responseDto.prev}">
                                 <a class="page-link" th:data-num="${responseDto.start - 1}">Previous</a>
                             </li>
@@ -90,6 +88,7 @@
         </div><!-- end col -->
     </div><!-- end row -->
 
+    <!-- Modal -->
     <div class="modal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -112,8 +111,6 @@
         </div>
     </div>
 
-</div><!-- end layout fragment -->
-
 <script layout:fragment="script" th:inline="javascript">
 
     // 이벤트 처리
@@ -134,7 +131,7 @@
 
         formObj.innerHTML += `<input type='hidden' name='page' value='${num}'/>`
 
-        formObj.submit()
+        formObj.submit();
 
     },false)
 
@@ -147,21 +144,15 @@
 
     },false)
 
-    const result = [[${result}]]
-
-    if(result){
-        alert(result)
-    }
-
     // show modal
-    /*const result = [[${result}]]
+    const result = [[${result}]]
 
     const modal = new bootstrap.Modal(document.querySelector(".modal"))
 
     if (result) {
       modal.show()
-    }*/
+    }
 
 </script>
-
+</div><!-- end layout fragment -->
 </html>
