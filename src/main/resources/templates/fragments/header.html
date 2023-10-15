@@ -1,111 +1,66 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymelead.org/extras/spring-security">
-      <!-- Spring Security 태그를 사용하기 위해서 네임스페이스 추가 -->
+<!-- Spring Security 태그를 사용하기 위해서 네임스페이스 추가 -->
 
-    <div th:fragment="header">
-        <header id="header">
-            <div class="header_area box_inner clear">
-                <h1><a href="javascript:;">Tourist in tour</a></h1>
-                <p class="openMOgnb"><a href="#"><b class="hdd">메뉴열기</b> <span></span><span></span><span></span></a></p>
-                <!-- header_cont -->
-                <div class="header_cont">
-                    <ul class="util clear">
-                        <li><a href="javascript:;">로그인</a></li>
-                        <li><a href="javascript:;">회원가입</a></li>
+<div th:fragment="header">
+    <header id="header">
+        <div class="header_area box_inner clear">
+            <h1><a href="/">Tourist in tour</a></h1>
+            <p class="openMOgnb"><a href="#"><b class="hdd">메뉴열기</b> <span></span><span></span><span></span></a></p>
+            <!-- header_cont -->
+            <div class="header_cont">
+                <ul class="util clear">
+                    <!-- 로그인하지 않은 상태이면 로그인 메뉴를 보여줌 -->
+                    <li sec:authorize="isAnonymous()">
+                        <a href="/members/login">로그인</a>
+                    </li>
+                    <!-- 로그인한 상태이면 로그아웃 메뉴를 보여줌 -->
+                    <li sec:authorize="isAuthenticated()">
+                        <a href="/members/logout">로그아웃</a>
+                    </li>
+                    <li><a href="/members/new">회원가입</a></li>
+                </ul>
+                <nav>
+                    <ul class="gnb clear">
+                        <!-- 관리자 계정(ADMIN ROLE)으로 로그인한 경우 상품 등록, 상품 관리 메뉴를 보여줌 -->
+                        <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+                            <a class="nav-link" href="/admin/item/new">상품 등록</a>
+                        </li>
+                        <!-- 관리자 계정(ADMIN ROLE)으로 로그인한 경우 상품 등록, 상품 관리 메뉴를 보여줌 -->
+                        <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+                            <a class="nav-link" href="/admin/items">상품 관리</a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="openAll1">베스트</a>
+                        </li>
+                        <li>
+                            <a href="/board/list" class="openAll3">게시판</a>
+                        </li>
+                        <!-- 로그인(인증, 회원만) 했을 경우에만 보여줌 -->
+                        <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_USER')">
+                            <a class="nav-link" href="/cart">장바구니</a>
+                        </li>
+                        <!-- 로그인(인증, 회원만) 했을 경우에만 보여줌 -->
+                        <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_USER')">
+                            <a class="nav-link" href="/orders">구매이력</a>
+                        </li>
+                        <div>
+                            <form class="form-inline my-2 my-lg-0" th:action="@{/}" method="get">
+                                <input name="searchQuery" class="form-control mr-sm-2" type="search"
+                                       placeholder="Search" aria-label="Search">
+                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+                                    Search
+                                </button>
+                            </form>
+                        </div>
                     </ul>
-                    <nav>
-                        <ul class="gnb clear">
-                            <li><a href="javascript:;" class="openAll1">여행정보</a>
-
-                                <div class="gnb_depth gnb_depth2_1">
-                                    <ul class="submenu_list">
-                                        <li><a href="javascript:;">국내</a></li>
-                                        <li><a href="javascript:;">해외</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li><a href="javascript:;" class="openAll2">고객센터</a>
-                                <div class="gnb_depth gnb_depth2_2">
-                                    <ul class="submenu_list">
-                                        <li><a href="javascript:;">공지사항</a></li>
-                                        <li><a href="javascript:;">문의하기</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li><a href="javascript:;" class="openAll3">상품투어</a>
-                                <div class="gnb_depth gnb_depth2_3">
-                                    <ul class="submenu_list">
-                                        <li><a href="javascript:;">프로그램 소개</a></li>
-                                        <li><a href="javascript:;">여행자료</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li><a href="javascript:;" class="openAll4">티켓/가이드</a>
-                                <div class="gnb_depth gnb_depth2_4">
-                                    <ul class="submenu_list">
-                                        <li><a href="javascript:;">항공</a></li>
-                                        <li><a href="javascript:;">호텔</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                    </nav>
-                    <p class="closePop"><a href="javascript:;">닫기</a></p>
-                </div>
-                <!-- //header_cont -->
+                </nav>
+                <p class="closePop"><a href="javascript:;">닫기</a></p>
             </div>
-        </header>
-    </div>
+            <!-- //header_cont -->
+        </div>
+    </header>
+</div>
 
 </html>
-<!--
-<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
-    <button class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarTogglerDemo03"
-            aria-controls="navbarTogglerDemo03"
-            aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <a class="navbar-brand" href="/">Shop</a>
-
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            &lt;!&ndash; 관리자 계정(ADMIN ROLE)으로 로그인한 경우 상품 등록, 상품 관리 메뉴를 보여줌 &ndash;&gt;
-            <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
-                <a class="nav-link" href="/admin/item/new">상품 등록</a>
-            </li>
-            &lt;!&ndash; 관리자 계정(ADMIN ROLE)으로 로그인한 경우 상품 등록, 상품 관리 메뉴를 보여줌 &ndash;&gt;
-            <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
-                <a class="nav-link" href="/admin/items">상품 관리</a>
-            </li>
-            &lt;!&ndash; 게시판은 아무나 접근 가능 &ndash;&gt;
-            <li class="nav-item">
-                <a class="nav-link" href="/board/list">게시판</a>
-            </li>
-            &lt;!&ndash; 로그인(인증, 회원만) 했을 경우에만 보여줌 &ndash;&gt;
-            <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_USER')">
-                <a class="nav-link" href="/cart">장바구니</a>
-            </li>
-            &lt;!&ndash; 로그인(인증, 회원만) 했을 경우에만 보여줌 &ndash;&gt;
-            <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_USER')">
-                <a class="nav-link" href="/orders">구매이력</a>
-            </li>
-            &lt;!&ndash; 로그인하지 않은 상태이면 로그인 메뉴를 보여줌 &ndash;&gt;
-            <li class="nav-item" sec:authorize="isAnonymous()">
-                <a class="nav-link" href="/members/login">로그인</a>
-            </li>
-            &lt;!&ndash; 로그인한 상태이면 로그아웃 메뉴를 보여줌 &ndash;&gt;
-            <li class="nav-item" sec:authorize="isAuthenticated()">
-                <a class="nav-link" href="/members/logout">로그아웃</a>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0" th:action="@{/}" method="get">
-            <input name="searchQuery" class="form-control mr-sm-2" type="search"
-                   placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-                Search
-            </button>
-        </form>
-    </div>
-</nav>-->
