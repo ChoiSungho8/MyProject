@@ -30,6 +30,7 @@ public class SecurityConfig {
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**"))
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/css/**"))
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/js/**"))
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/images/**"))
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/img/**"));
     }
 
@@ -41,25 +42,21 @@ public class SecurityConfig {
 
         http.formLogin(formLogin -> formLogin
                 .loginPage("/members/login")
-                .defaultSuccessUrl("/")
+                .defaultSuccessUrl("/", true)
                 .usernameParameter("email")
                 .failureUrl("/members/login/error"))
                 .logout(logout -> logout
                         .logoutRequestMatcher(AntPathRequestMatcher.antMatcher("/members/logout"))
-                        .logoutSuccessUrl("/"));
-
-        http.authorizeHttpRequests(authorize -> authorize
+                        .logoutSuccessUrl("/"))
+                .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/")).permitAll()
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/board/**")).permitAll()
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/members/**")).permitAll()
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/item/**")).permitAll()
-                .requestMatchers(AntPathRequestMatcher.antMatcher("/images/**")).permitAll()
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/admin/**")).hasRole("ADMIN")
-                .anyRequest().authenticated()
-        );
-
-        // 인증 되지 않은 사용자가 리소스에 접근하였을 대 수행되는 핸들러를 등록합니다.
-        http.exceptionHandling(exceptionHandling -> exceptionHandling
+                .anyRequest().authenticated())
+                // 인증 되지 않은 사용자가 리소스에 접근하였을 대 수행되는 핸들러를 등록합니다.
+                .exceptionHandling(exceptionHandling -> exceptionHandling
                 .authenticationEntryPoint(new CustomAuthenticationEntryPoint()));
 
         return http.build();

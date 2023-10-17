@@ -7,8 +7,7 @@
 <th:block layout:fragment="css">
   <style>
     .carousel-inner > .item {
-      height: 100px;
-      width: 100px;
+      height: 350px;
     }
     .margin {
       margin-bottom: 30px;
@@ -61,7 +60,6 @@
             <img th:src="${item.imgUrl}" class="card-img-top" th:alt="${item.itemNm}" height="400"/>
             <div class="card-body">
               <h4 class="card-title">[[${item.itemNm}]]</h4>
-              <p class="card-text">[[${item.itemDetail}]]</p>
               <h3 class="card-title text-danger">[[${item.price}]]원</h3>
             </div>
           </a>
@@ -91,6 +89,35 @@
 
     </ul>
   </div>
+
+  <!-- app_area -->
+  <div class="appbbs_area">
+    <div class="appbbs_box box_inner clear">
+      <h2 class="hdd">상담과 최근게시물</h2>
+      <p class="app_line">
+        <a href="javascript:;">카카오톡 1:1 상담</a>
+        <a href="javascript:;">전화 상담 신청</a>
+      </p>
+      <div class="bbs_line">
+        <h3>NOTICE</h3>
+        <ul class="notice_recent">
+          <li><a href="javascript:;">★2023 추석 택배 마감일 및 재개일 안내★</a></li>
+          <li><a href="javascript:;">방문수령 예약 관련 안내(픽업매장)</a></li>
+          <li><a href="javascript:;">★대전 내 배송시간 및 배송불가지역 안내★</a></li>
+          <li><a href="javascript:;">성심당 외국산 재료 원산지 표기</a></li>
+          <li><a href="javascript:;">2023 무료배송기준안내</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- //app_area -->
+
+  <script layout:fragment="script" th:inline="javascript">
+    const success = [[${success}]]
+    if (success) {
+      alert("회원 가입이 완료되었습니다.")
+    }
+  </script>
 
 </div>
 

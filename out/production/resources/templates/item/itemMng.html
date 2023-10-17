@@ -25,9 +25,9 @@
       var searchQuery = $("#searchQuery").val();
 
       location.href="/admin/items/" + page + "?searchDateType=" + searchDateType
-      + "&searchSellStatus=" + searchSellStatus
-      + "&searchBy=" + searchBy
-      + "&searchQuery=" + searchQuery;
+              + "&searchSellStatus=" + searchSellStatus
+              + "&searchBy=" + searchBy
+              + "&searchQuery=" + searchQuery;
     }
 
   </script>
@@ -68,7 +68,7 @@
         <!-- 현재 상품의 판매 상태가 "SELL"이면 '판매 중'으로, 같지 않으면 '품절'로 보여줍니다. -->
         <td th:text="${item.itemSellStatus == T(org.zerock.shop.constant.ItemSellStatus).SELL} ? '판매중' : '품절'"></td>
         <td th:text="${item.createdBy}"></td>
-        <td th:text="${item.regTime}"></td>
+        <td>[[${#temporals.format(item.regTime, 'yyyy-MM-dd')}]]</td>
       </tr>
       </tbody>
     </table>
