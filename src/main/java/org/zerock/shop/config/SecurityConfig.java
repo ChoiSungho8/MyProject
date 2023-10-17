@@ -28,6 +28,7 @@ public class SecurityConfig {
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web.ignoring()
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**"))
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/v3/api-docs/**"))
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/css/**"))
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/js/**"))
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/images/**"))
@@ -49,6 +50,7 @@ public class SecurityConfig {
                         .logoutRequestMatcher(AntPathRequestMatcher.antMatcher("/members/logout"))
                         .logoutSuccessUrl("/"))
                 .authorizeHttpRequests(authorize -> authorize
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/swagger*/**")).permitAll()
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/")).permitAll()
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/board/**")).permitAll()
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/members/**")).permitAll()

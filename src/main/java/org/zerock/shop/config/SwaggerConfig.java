@@ -6,15 +6,9 @@ import lombok.RequiredArgsConstructor;
 import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
 
 @OpenAPIDefinition(
-        info = @Info(title = "Zerock App",version = "v1"))
+        info = @Info(title = "Zerock App",version = "v3"))
 @RequiredArgsConstructor
 @Configuration
 public class SwaggerConfig {
@@ -24,8 +18,9 @@ public class SwaggerConfig {
         String[] paths = {"/**"};
 
         return GroupedOpenApi.builder()
-                .group("Zerock OPEN API v1")
+                .group("Zerock OPEN API v3")
                 .pathsToMatch(paths)
                 .build();
     }
+
 }
