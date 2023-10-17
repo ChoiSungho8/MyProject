@@ -36,6 +36,7 @@ dependencies {
     // Swagger UI 준비
     implementation 'io.springfox:springfox-boot-starter:3.0.0'
     implementation 'io.springfox:springfox-swagger-ui:3.0.0'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
 
     // log4j2, test log4j2 추가
     implementation 'org.springframework.boot:spring-boot-starter-log4j2'
