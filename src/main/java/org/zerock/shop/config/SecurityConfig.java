@@ -29,6 +29,7 @@ public class SecurityConfig {
         return (web) -> web.ignoring()
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**"))
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/v3/api-docs/**"))
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/replies/**"))
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/css/**"))
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/js/**"))
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/images/**"))
