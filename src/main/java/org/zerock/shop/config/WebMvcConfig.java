@@ -18,6 +18,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/images/**")
                 // 로컬 컴퓨터에 저장된 파일을 읽어올 root 경로를 설정
                 .addResourceLocations(uploadPath);
+
     }
 
 }
