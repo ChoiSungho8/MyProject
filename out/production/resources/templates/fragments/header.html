@@ -13,13 +13,13 @@
                 <ul class="util clear">
                     <!-- 로그인하지 않은 상태이면 로그인 메뉴를 보여줌 -->
                     <li sec:authorize="isAnonymous()">
-                        <a href="/members/login">로그인</a>
+                        <a href="/member/login">로그인</a>
                     </li>
                     <!-- 로그인한 상태이면 로그아웃 메뉴를 보여줌 -->
                     <li sec:authorize="isAuthenticated()">
-                        <a href="/members/logout">로그아웃</a>
+                        <a href="/member/logout">로그아웃</a>
                     </li>
-                    <li><a href="/members/new">회원가입</a></li>
+                    <li><a href="/member/new">회원가입</a></li>
                 </ul>
                 <nav>
                     <ul class="gnb clear">
