@@ -24,7 +24,7 @@ public class SecurityConfig {
     }
 
     // static 디렉터리의 하위 파일은 인증을 무시하도록 설정
-    @Bean
+    /*@Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web.ignoring()
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**"))
@@ -34,7 +34,7 @@ public class SecurityConfig {
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/js/**"))
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/images/**"))
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/img/**"));
-    }
+    }*/
 
     // http 요청에 대한 보안을 설정합니다.
     // 페이지 권한 설정, 로그인 페이지 설정, 로그아웃 메소드 등에 대한 설정 작성
@@ -51,13 +51,21 @@ public class SecurityConfig {
                         .logoutRequestMatcher(AntPathRequestMatcher.antMatcher("/members/logout"))
                         .logoutSuccessUrl("/"))
                 .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers(AntPathRequestMatcher.antMatcher("/swagger*/**")).permitAll()
-                .requestMatchers(AntPathRequestMatcher.antMatcher("/")).permitAll()
-                .requestMatchers(AntPathRequestMatcher.antMatcher("/board/**")).permitAll()
-                .requestMatchers(AntPathRequestMatcher.antMatcher("/members/**")).permitAll()
-                .requestMatchers(AntPathRequestMatcher.antMatcher("/item/**")).permitAll()
-                .requestMatchers(AntPathRequestMatcher.antMatcher("/admin/**")).hasRole("ADMIN")
-                .anyRequest().authenticated())
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/swagger*/**")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/replies/**")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/css/**")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/js/**")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/images/**")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/swagger*/**")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/img/**")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/v3/api-docs/**")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/board/**")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/members/**")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/item/**")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/admin/**")).hasRole("ADMIN")
+                        .anyRequest().authenticated())
                 // 인증 되지 않은 사용자가 리소스에 접근하였을 대 수행되는 핸들러를 등록합니다.
                 .exceptionHandling(exceptionHandling -> exceptionHandling
                 .authenticationEntryPoint(new CustomAuthenticationEntryPoint()));

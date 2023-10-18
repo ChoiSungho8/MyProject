@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.shop.dto.BoardDto;
+import org.zerock.shop.dto.BoardListReplyCountDto;
 import org.zerock.shop.dto.PageRequestDto;
 import org.zerock.shop.dto.PageResponseDto;
 import org.zerock.shop.entity.Board;
@@ -97,6 +98,24 @@ public class BoardServiceImpl implements BoardService {
         return PageResponseDto.<BoardDto>withAll()
                 .pageRequestDto(pageRequestDto)
                 .dtoList(dtoList)
+                .total((int)result.getTotalElements())
+                .build();
+
+    }
+
+    // 댓글의 숫자까지 처리하기 위한 메소드
+    @Override
+    public PageResponseDto<BoardListReplyCountDto> listWithReplyCount(PageRequestDto pageRequestDto) {
+
+        String[] types = pageRequestDto.getTypes();
+        String keyword = pageRequestDto.getKeyword();
+        Pageable pageable = pageRequestDto.getPageable("bno");
+
+        Page<BoardListReplyCountDto> result = boardRepository.searchWithReplyCount(types, keyword, pageable);
+
+        return PageResponseDto.<BoardListReplyCountDto>withAll()
+                .pageRequestDto(pageRequestDto)
+                .dtoList(result.getContent())
                 .total((int)result.getTotalElements())
                 .build();
 

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.shop.dto.BoardDto;
+import org.zerock.shop.dto.BoardListReplyCountDto;
 import org.zerock.shop.dto.PageRequestDto;
 import org.zerock.shop.dto.PageResponseDto;
 import org.zerock.shop.service.BoardService;
@@ -29,7 +30,9 @@ public class BoardController {
     public void list(PageRequestDto pageRequestDto, Model model) {
 
         // 화면에 목록 데이터를 출력
-        PageResponseDto<BoardDto> responseDto = boardService.list(pageRequestDto);
+        // PageResponseDto<BoardDto> responseDto = boardService.list(pageRequestDto);
+
+        PageResponseDto<BoardListReplyCountDto> responseDto = boardService.listWithReplyCount(pageRequestDto);
 
         log.info(responseDto);
 

@@ -42,7 +42,7 @@
 
     <!-- replace : 해당 속성이 선언된 html 태그를 다른 html 파일로 치환 -->
     <!-- fragments 폴더 아래 header.html 파일의 th:fragment=header 영역을 가지고 옴 -->
-    <div th:replace="fragments/header::header"></div>
+    <div th:replace="~{fragments/header::header}"></div>
 
     <div id="container">
         <div class="main_rolling_pc">
@@ -97,7 +97,7 @@
     </div>
     <!-- //container -->
 
-    <div th:replace="fragments/footer::footer"></div>
+    <div th:replace="~{fragments/footer::footer}"></div>
 
 </div>
 <!-- //wrap -->

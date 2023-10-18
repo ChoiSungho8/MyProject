@@ -12,7 +12,7 @@ import java.util.List;
 public interface CartItemRepository extends JpaRepository<CartItem, Long> {
     
     // 카트 아이디와 상품 아이디를 이용해서 상품이 장바구니에 들어있는지 조회
-    CartItem findByCartIdAndItemId(Long cartId, Long itemId);
+    CartItem findByCartIdAndItemId(@Param("cartId") Long cartId, @Param("itemId") Long itemId);
 
     // 장바구니 페이지에 전달할 CartDetailDto 리스트를 쿼리 하나로 조회하는 JPQL문을 작성합니다.
     // 연관 관계 매핑을 지연 로딩으로 설정할 경우 엔티티에 매핑된 다른 엔티티를 조회할 때 추가적으로 쿼리문이 실행
