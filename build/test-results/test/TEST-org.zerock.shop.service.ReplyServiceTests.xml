@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.zerock.shop.service.ReplyServiceTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-10-19T15:57:32" hostname="10-5" time="0.013">
+  <properties/>
+  <testcase name="testRegister()" classname="org.zerock.shop.service.ReplyServiceTests" time="0.013"/>
+  <system-out><![CDATA[2023-10-20T00:57:32.427+09:00  INFO 1440 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [org.zerock.shop.service.ReplyServiceTests]: ReplyServiceTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-10-20T00:57:32.429+09:00  INFO 1440 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration org.zerock.shop.ShopApplication for test class org.zerock.shop.service.ReplyServiceTests
+Hibernate: 
+    insert 
+    into
+        reply
+        (board_bno,created_by,modified_by,reg_time,reply_text,replyer,update_time) 
+    values
+        (?,?,?,?,?,?,?)
+2023-10-20T00:57:32.445+09:00  INFO 1440 --- [    Test worker] o.z.s.s.ReplyServiceTests                : 54
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.zerock.shop.service.MemberServiceTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2023-10-19T15:57:32" hostname="10-5" time="0.241">
+  <properties/>
+  <testcase name="회원가입 테스트" classname="org.zerock.shop.service.MemberServiceTest" time="0.081"/>
+  <testcase name="중복 회원 가입 테스트" classname="org.zerock.shop.service.MemberServiceTest" time="0.159"/>
+  <system-out><![CDATA[2023-10-20T00:57:32.144+09:00  INFO 1440 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [org.zerock.shop.service.MemberServiceTest]: MemberServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-10-20T00:57:32.146+09:00  INFO 1440 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration org.zerock.shop.ShopApplication for test class org.zerock.shop.service.MemberServiceTest
+Hibernate: 
+    select
+        m1_0.member_id,
+        m1_0.address,
+        m1_0.created_by,
+        m1_0.email,
+        m1_0.modified_by,
+        m1_0.name,
+        m1_0.password,
+        m1_0.reg_time,
+        m1_0.role,
+        m1_0.update_time 
+    from
+        member m1_0 
+    where
+        m1_0.email=?
+Hibernate: 
+    select
+        m1_0.member_id,
+        m1_0.address,
+        m1_0.created_by,
+        m1_0.email,
+        m1_0.modified_by,
+        m1_0.name,
+        m1_0.password,
+        m1_0.reg_time,
+        m1_0.role,
+        m1_0.update_time 
+    from
+        member m1_0 
+    where
+        m1_0.email=?
+Hibernate: 
+    insert 
+    into
+        member
+        (address,created_by,email,modified_by,name,password,reg_time,role,update_time,member_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    select
+        m1_0.member_id,
+        m1_0.address,
+        m1_0.created_by,
+        m1_0.email,
+        m1_0.modified_by,
+        m1_0.name,
+        m1_0.password,
+        m1_0.reg_time,
+        m1_0.role,
+        m1_0.update_time 
+    from
+        member m1_0 
+    where
+        m1_0.email=?
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

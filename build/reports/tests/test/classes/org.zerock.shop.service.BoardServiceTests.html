@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - BoardServiceTests</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>BoardServiceTests</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/org.zerock.shop.service.html">org.zerock.shop.service</a> &gt; BoardServiceTests</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">3</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.127s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">testList()</td>
+<td class="success">0.106s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testModify()</td>
+<td class="success">0.010s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testRegister()</td>
+<td class="success">0.011s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>2023-10-20T00:57:31.898+09:00  INFO 1440 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [org.zerock.shop.service.BoardServiceTests]: BoardServiceTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-10-20T00:57:31.917+09:00  INFO 1440 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration org.zerock.shop.ShopApplication for test class org.zerock.shop.service.BoardServiceTests
+Hibernate: 
+    select
+        b1_0.bno,
+        b1_0.content,
+        b1_0.created_by,
+        b1_0.modified_by,
+        b1_0.reg_time,
+        b1_0.title,
+        b1_0.update_time,
+        b1_0.writer 
+    from
+        board b1_0 
+    where
+        (
+            b1_0.title like ? escape '!' 
+            or b1_0.content like ? escape '!' 
+            or b1_0.writer like ? escape '!'
+        ) 
+        and b1_0.bno&gt;? 
+    order by
+        b1_0.bno desc limit ?,
+        ?
+Hibernate: 
+    select
+        count(b1_0.bno) 
+    from
+        board b1_0 
+    where
+        (
+            b1_0.title like ? escape '!' 
+            or b1_0.content like ? escape '!' 
+            or b1_0.writer like ? escape '!'
+        ) 
+        and b1_0.bno&gt;?
+2023-10-20T00:57:32.017+09:00  INFO 1440 --- [    Test worker] o.z.s.s.BoardServiceTests                : PageResponseDto(page=1, size=10, total=559, start=1, end=10, prev=false, next=true, dtoList=[BoardDto(bno=2853, title=title...100, content=content...100, writer=user0, regTime=2023-10-20T00:57:31.271343, updateTime=2023-10-20T00:57:31.271343), BoardDto(bno=2844, title=title...91, content=content...91, writer=user1, regTime=2023-10-20T00:57:31.233446, updateTime=2023-10-20T00:57:31.233446), BoardDto(bno=2834, title=title...81, content=content...81, writer=user1, regTime=2023-10-20T00:57:31.194423, updateTime=2023-10-20T00:57:31.194423), BoardDto(bno=2824, title=title...71, content=content...71, writer=user1, regTime=2023-10-20T00:57:31.153517, updateTime=2023-10-20T00:57:31.153517), BoardDto(bno=2814, title=title...61, content=content...61, writer=user1, regTime=2023-10-20T00:57:31.107296, updateTime=2023-10-20T00:57:31.107296), BoardDto(bno=2804, title=title...51, content=content...51, writer=user1, regTime=2023-10-20T00:57:31.063343, updateTime=2023-10-20T00:57:31.063343), BoardDto(bno=2794, title=title...41, content=content...41, writer=user1, regTime=2023-10-20T00:57:31.023692, updateTime=2023-10-20T00:57:31.023692), BoardDto(bno=2784, title=title...31, content=content...31, writer=user1, regTime=2023-10-20T00:57:30.974447, updateTime=2023-10-20T00:57:30.974447), BoardDto(bno=2774, title=title...21, content=content...21, writer=user1, regTime=2023-10-20T00:57:30.924479, updateTime=2023-10-20T00:57:30.924479), BoardDto(bno=2772, title=title...19, content=content...19, writer=user9, regTime=2023-10-20T00:57:30.915847, updateTime=2023-10-20T00:57:30.915847)])
+2023-10-20T00:57:32.031+09:00  INFO 1440 --- [    Test worker] o.z.s.s.BoardServiceTests                : org.zerock.shop.service.BoardServiceImpl$$SpringCGLIB$$0
+Hibernate: 
+    insert 
+    into
+        board
+        (content,created_by,modified_by,reg_time,title,update_time,writer) 
+    values
+        (?,?,?,?,?,?,?)
+2023-10-20T00:57:32.038+09:00  INFO 1440 --- [    Test worker] o.z.s.s.BoardServiceTests                : bno : 2854
+Hibernate: 
+    select
+        b1_0.bno,
+        b1_0.content,
+        b1_0.created_by,
+        b1_0.modified_by,
+        b1_0.reg_time,
+        b1_0.title,
+        b1_0.update_time,
+        b1_0.writer 
+    from
+        board b1_0 
+    where
+        b1_0.bno=?
+Hibernate: 
+    update
+        board 
+    set
+        content=?,
+        modified_by=?,
+        title=?,
+        update_time=?,
+        writer=? 
+    where
+        bno=?
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 8.2.1</a> at 2023. 10. 20. 오전 12:57:32</p>
+</div>
+</div>
+</body>
+</html>

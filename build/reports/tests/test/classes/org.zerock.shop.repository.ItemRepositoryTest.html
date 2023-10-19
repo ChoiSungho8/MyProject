@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - ItemRepositoryTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>ItemRepositoryTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/org.zerock.shop.repository.html">org.zerock.shop.repository</a> &gt; ItemRepositoryTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">9</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.453s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Method name</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">createItemList()</td>
+<td class="success">createItemList()</td>
+<td class="success">0.032s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">상품 저장 테스트</td>
+<td class="success">createItemTest()</td>
+<td class="success">0.005s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">@Query를 이용한 상품 조회 테스트</td>
+<td class="success">findByItemDeatailTest()</td>
+<td class="success">0.043s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">nativeQuery 속성을 이용한 상품 조회 테스트</td>
+<td class="success">findByItemDetailByNative()</td>
+<td class="success">0.164s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">상품명, 상품상세설명 or 테스트</td>
+<td class="success">findByItemNmOrItemDetailTest()</td>
+<td class="success">0.037s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">상품명 조회 테스트</td>
+<td class="success">findByItemNmTest()</td>
+<td class="success">0.010s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">가격 LessThan 테스트</td>
+<td class="success">findByPriceLessThanTest()</td>
+<td class="success">0.028s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Querydsl 조회 테스트1</td>
+<td class="success">queryDslTest()</td>
+<td class="success">0.086s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">상품 Querydsl 조회 테스트 2</td>
+<td class="success">queryDslTest2()</td>
+<td class="success">0.048s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>2023-10-20T00:57:31.374+09:00  INFO 1440 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [org.zerock.shop.repository.ItemRepositoryTest]: ItemRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-10-20T00:57:31.376+09:00  INFO 1440 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration org.zerock.shop.ShopApplication for test class org.zerock.shop.repository.ItemRepositoryTest
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    select
+        i1_0.item_id,
+        i1_0.created_by,
+        i1_0.item_detail,
+        i1_0.item_nm,
+        i1_0.item_sell_status,
+        i1_0.modified_by,
+        i1_0.price,
+        i1_0.reg_time,
+        i1_0.stock_number,
+        i1_0.update_time 
+    from
+        item i1_0 
+    where
+        i1_0.item_sell_status=? 
+        and i1_0.item_detail like ? escape '!' 
+    order by
+        i1_0.price desc
+Item(id=19, itemNm=테스트 상품10, price=10010, stockNumber=100, itemDetail=테스트 상품 상세 설명10, itemSellStatus=SELL)
+Item(id=18, itemNm=테스트 상품9, price=10009, stockNumber=100, itemDetail=테스트 상품 상세 설명9, itemSellStatus=SELL)
+Item(id=17, itemNm=테스트 상품8, price=10008, stockNumber=100, itemDetail=테스트 상품 상세 설명8, itemSellStatus=SELL)
+Item(id=16, itemNm=테스트 상품7, price=10007, stockNumber=100, itemDetail=테스트 상품 상세 설명7, itemSellStatus=SELL)
+Item(id=15, itemNm=테스트 상품6, price=10006, stockNumber=100, itemDetail=테스트 상품 상세 설명6, itemSellStatus=SELL)
+Item(id=14, itemNm=테스트 상품5, price=10005, stockNumber=100, itemDetail=테스트 상품 상세 설명5, itemSellStatus=SELL)
+Item(id=13, itemNm=테스트 상품4, price=10004, stockNumber=100, itemDetail=테스트 상품 상세 설명4, itemSellStatus=SELL)
+Item(id=12, itemNm=테스트 상품3, price=10003, stockNumber=100, itemDetail=테스트 상품 상세 설명3, itemSellStatus=SELL)
+Item(id=11, itemNm=테스트 상품2, price=10002, stockNumber=100, itemDetail=테스트 상품 상세 설명2, itemSellStatus=SELL)
+Item(id=10, itemNm=테스트 상품1, price=10001, stockNumber=100, itemDetail=테스트 상품 상세 설명1, itemSellStatus=SELL)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    select
+        i1_0.item_id,
+        i1_0.created_by,
+        i1_0.item_detail,
+        i1_0.item_nm,
+        i1_0.item_sell_status,
+        i1_0.modified_by,
+        i1_0.price,
+        i1_0.reg_time,
+        i1_0.stock_number,
+        i1_0.update_time 
+    from
+        item i1_0 
+    where
+        i1_0.item_detail like ? escape '' 
+    order by
+        i1_0.price desc
+Item(id=19, itemNm=테스트 상품10, price=10010, stockNumber=100, itemDetail=테스트 상품 상세 설명10, itemSellStatus=SELL)
+Item(id=29, itemNm=테스트 상품10, price=10010, stockNumber=100, itemDetail=테스트 상품 상세 설명10, itemSellStatus=SELL)
+Item(id=18, itemNm=테스트 상품9, price=10009, stockNumber=100, itemDetail=테스트 상품 상세 설명9, itemSellStatus=SELL)
+Item(id=28, itemNm=테스트 상품9, price=10009, stockNumber=100, itemDetail=테스트 상품 상세 설명9, itemSellStatus=SELL)
+Item(id=17, itemNm=테스트 상품8, price=10008, stockNumber=100, itemDetail=테스트 상품 상세 설명8, itemSellStatus=SELL)
+Item(id=27, itemNm=테스트 상품8, price=10008, stockNumber=100, itemDetail=테스트 상품 상세 설명8, itemSellStatus=SELL)
+Item(id=16, itemNm=테스트 상품7, price=10007, stockNumber=100, itemDetail=테스트 상품 상세 설명7, itemSellStatus=SELL)
+Item(id=26, itemNm=테스트 상품7, price=10007, stockNumber=100, itemDetail=테스트 상품 상세 설명7, itemSellStatus=SELL)
+Item(id=15, itemNm=테스트 상품6, price=10006, stockNumber=100, itemDetail=테스트 상품 상세 설명6, itemSellStatus=SELL)
+Item(id=25, itemNm=테스트 상품6, price=10006, stockNumber=100, itemDetail=테스트 상품 상세 설명6, itemSellStatus=SELL)
+Item(id=14, itemNm=테스트 상품5, price=10005, stockNumber=100, itemDetail=테스트 상품 상세 설명5, itemSellStatus=SELL)
+Item(id=24, itemNm=테스트 상품5, price=10005, stockNumber=100, itemDetail=테스트 상품 상세 설명5, itemSellStatus=SELL)
+Item(id=13, itemNm=테스트 상품4, price=10004, stockNumber=100, itemDetail=테스트 상품 상세 설명4, itemSellStatus=SELL)
+Item(id=23, itemNm=테스트 상품4, price=10004, stockNumber=100, itemDetail=테스트 상품 상세 설명4, itemSellStatus=SELL)
+Item(id=12, itemNm=테스트 상품3, price=10003, stockNumber=100, itemDetail=테스트 상품 상세 설명3, itemSellStatus=SELL)
+Item(id=22, itemNm=테스트 상품3, price=10003, stockNumber=100, itemDetail=테스트 상품 상세 설명3, itemSellStatus=SELL)
+Item(id=11, itemNm=테스트 상품2, price=10002, stockNumber=100, itemDetail=테스트 상품 상세 설명2, itemSellStatus=SELL)
+Item(id=21, itemNm=테스트 상품2, price=10002, stockNumber=100, itemDetail=테스트 상품 상세 설명2, itemSellStatus=SELL)
+Item(id=10, itemNm=테스트 상품1, price=10001, stockNumber=100, itemDetail=테스트 상품 상세 설명1, itemSellStatus=SELL)
+Item(id=20, itemNm=테스트 상품1, price=10001, stockNumber=100, itemDetail=테스트 상품 상세 설명1, itemSellStatus=SELL)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    select
+        i1_0.item_id,
+        i1_0.created_by,
+        i1_0.item_detail,
+        i1_0.item_nm,
+        i1_0.item_sell_status,
+        i1_0.modified_by,
+        i1_0.price,
+        i1_0.reg_time,
+        i1_0.stock_number,
+        i1_0.update_time 
+    from
+        item i1_0 
+    where
+        i1_0.item_nm=? 
+        or i1_0.item_detail=?
+Item(id=10, itemNm=테스트 상품1, price=10001, stockNumber=100, itemDetail=테스트 상품 상세 설명1, itemSellStatus=SELL)
+Item(id=14, itemNm=테스트 상품5, price=10005, stockNumber=100, itemDetail=테스트 상품 상세 설명5, itemSellStatus=SELL)
+Item(id=20, itemNm=테스트 상품1, price=10001, stockNumber=100, itemDetail=테스트 상품 상세 설명1, itemSellStatus=SELL)
+Item(id=24, itemNm=테스트 상품5, price=10005, stockNumber=100, itemDetail=테스트 상품 상세 설명5, itemSellStatus=SELL)
+Item(id=30, itemNm=테스트 상품1, price=10001, stockNumber=100, itemDetail=테스트 상품 상세 설명1, itemSellStatus=SELL)
+Item(id=34, itemNm=테스트 상품5, price=10005, stockNumber=100, itemDetail=테스트 상품 상세 설명5, itemSellStatus=SELL)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    select
+        i1_0.item_id,
+        i1_0.created_by,
+        i1_0.item_detail,
+        i1_0.item_nm,
+        i1_0.item_sell_status,
+        i1_0.modified_by,
+        i1_0.price,
+        i1_0.reg_time,
+        i1_0.stock_number,
+        i1_0.update_time 
+    from
+        item i1_0 
+    where
+        i1_0.price&lt;?
+Item(id=10, itemNm=테스트 상품1, price=10001, stockNumber=100, itemDetail=테스트 상품 상세 설명1, itemSellStatus=SELL)
+Item(id=11, itemNm=테스트 상품2, price=10002, stockNumber=100, itemDetail=테스트 상품 상세 설명2, itemSellStatus=SELL)
+Item(id=12, itemNm=테스트 상품3, price=10003, stockNumber=100, itemDetail=테스트 상품 상세 설명3, itemSellStatus=SELL)
+Item(id=13, itemNm=테스트 상품4, price=10004, stockNumber=100, itemDetail=테스트 상품 상세 설명4, itemSellStatus=SELL)
+Item(id=20, itemNm=테스트 상품1, price=10001, stockNumber=100, itemDetail=테스트 상품 상세 설명1, itemSellStatus=SELL)
+Item(id=21, itemNm=테스트 상품2, price=10002, stockNumber=100, itemDetail=테스트 상품 상세 설명2, itemSellStatus=SELL)
+Item(id=22, itemNm=테스트 상품3, price=10003, stockNumber=100, itemDetail=테스트 상품 상세 설명3, itemSellStatus=SELL)
+Item(id=23, itemNm=테스트 상품4, price=10004, stockNumber=100, itemDetail=테스트 상품 상세 설명4, itemSellStatus=SELL)
+Item(id=30, itemNm=테스트 상품1, price=10001, stockNumber=100, itemDetail=테스트 상품 상세 설명1, itemSellStatus=SELL)
+Item(id=31, itemNm=테스트 상품2, price=10002, stockNumber=100, itemDetail=테스트 상품 상세 설명2, itemSellStatus=SELL)
+Item(id=32, itemNm=테스트 상품3, price=10003, stockNumber=100, itemDetail=테스트 상품 상세 설명3, itemSellStatus=SELL)
+Item(id=33, itemNm=테스트 상품4, price=10004, stockNumber=100, itemDetail=테스트 상품 상세 설명4, itemSellStatus=SELL)
+Item(id=40, itemNm=테스트 상품1, price=10001, stockNumber=100, itemDetail=테스트 상품 상세 설명1, itemSellStatus=SELL)
+Item(id=41, itemNm=테스트 상품2, price=10002, stockNumber=100, itemDetail=테스트 상품 상세 설명2, itemSellStatus=SELL)
+Item(id=42, itemNm=테스트 상품3, price=10003, stockNumber=100, itemDetail=테스트 상품 상세 설명3, itemSellStatus=SELL)
+Item(id=43, itemNm=테스트 상품4, price=10004, stockNumber=100, itemDetail=테스트 상품 상세 설명4, itemSellStatus=SELL)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Item(id=50, itemNm=테스트 상품, price=10000, stockNumber=100, itemDetail=테스트 상품 상세 설명, itemSellStatus=SELL)
+Hibernate: 
+    select
+        i1_0.item_id,
+        i1_0.created_by,
+        i1_0.item_detail,
+        i1_0.item_nm,
+        i1_0.item_sell_status,
+        i1_0.modified_by,
+        i1_0.price,
+        i1_0.reg_time,
+        i1_0.stock_number,
+        i1_0.update_time 
+    from
+        item i1_0 
+    where
+        i1_0.item_nm=?
+Item(id=10, itemNm=테스트 상품1, price=10001, stockNumber=100, itemDetail=테스트 상품 상세 설명1, itemSellStatus=SELL)
+Item(id=20, itemNm=테스트 상품1, price=10001, stockNumber=100, itemDetail=테스트 상품 상세 설명1, itemSellStatus=SELL)
+Item(id=30, itemNm=테스트 상품1, price=10001, stockNumber=100, itemDetail=테스트 상품 상세 설명1, itemSellStatus=SELL)
+Item(id=40, itemNm=테스트 상품1, price=10001, stockNumber=100, itemDetail=테스트 상품 상세 설명1, itemSellStatus=SELL)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    select
+        next value for item_seq
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    select
+        * 
+    from
+        item i 
+    where
+        i.item_detail like ? 
+    order by
+        i.price desc
+Item(id=19, itemNm=테스트 상품10, price=10010, stockNumber=100, itemDetail=테스트 상품 상세 설명10, itemSellStatus=SELL)
+Item(id=29, itemNm=테스트 상품10, price=10010, stockNumber=100, itemDetail=테스트 상품 상세 설명10, itemSellStatus=SELL)
+Item(id=39, itemNm=테스트 상품10, price=10010, stockNumber=100, itemDetail=테스트 상품 상세 설명10, itemSellStatus=SELL)
+Item(id=49, itemNm=테스트 상품10, price=10010, stockNumber=100, itemDetail=테스트 상품 상세 설명10, itemSellStatus=SELL)
+Item(id=60, itemNm=테스트 상품10, price=10010, stockNumber=100, itemDetail=테스트 상품 상세 설명10, itemSellStatus=SELL)
+Item(id=18, itemNm=테스트 상품9, price=10009, stockNumber=100, itemDetail=테스트 상품 상세 설명9, itemSellStatus=SELL)
+Item(id=28, itemNm=테스트 상품9, price=10009, stockNumber=100, itemDetail=테스트 상품 상세 설명9, itemSellStatus=SELL)
+Item(id=38, itemNm=테스트 상품9, price=10009, stockNumber=100, itemDetail=테스트 상품 상세 설명9, itemSellStatus=SELL)
+Item(id=48, itemNm=테스트 상품9, price=10009, stockNumber=100, itemDetail=테스트 상품 상세 설명9, itemSellStatus=SELL)
+Item(id=59, itemNm=테스트 상품9, price=10009, stockNumber=100, itemDetail=테스트 상품 상세 설명9, itemSellStatus=SELL)
+Item(id=17, itemNm=테스트 상품8, price=10008, stockNumber=100, itemDetail=테스트 상품 상세 설명8, itemSellStatus=SELL)
+Item(id=27, itemNm=테스트 상품8, price=10008, stockNumber=100, itemDetail=테스트 상품 상세 설명8, itemSellStatus=SELL)
+Item(id=37, itemNm=테스트 상품8, price=10008, stockNumber=100, itemDetail=테스트 상품 상세 설명8, itemSellStatus=SELL)
+Item(id=47, itemNm=테스트 상품8, price=10008, stockNumber=100, itemDetail=테스트 상품 상세 설명8, itemSellStatus=SELL)
+Item(id=58, itemNm=테스트 상품8, price=10008, stockNumber=100, itemDetail=테스트 상품 상세 설명8, itemSellStatus=SELL)
+Item(id=16, itemNm=테스트 상품7, price=10007, stockNumber=100, itemDetail=테스트 상품 상세 설명7, itemSellStatus=SELL)
+Item(id=26, itemNm=테스트 상품7, price=10007, stockNumber=100, itemDetail=테스트 상품 상세 설명7, itemSellStatus=SELL)
+Item(id=36, itemNm=테스트 상품7, price=10007, stockNumber=100, itemDetail=테스트 상품 상세 설명7, itemSellStatus=SELL)
+Item(id=46, itemNm=테스트 상품7, price=10007, stockNumber=100, itemDetail=테스트 상품 상세 설명7, itemSellStatus=SELL)
+Item(id=57, itemNm=테스트 상품7, price=10007, stockNumber=100, itemDetail=테스트 상품 상세 설명7, itemSellStatus=SELL)
+Item(id=15, itemNm=테스트 상품6, price=10006, stockNumber=100, itemDetail=테스트 상품 상세 설명6, itemSellStatus=SELL)
+Item(id=25, itemNm=테스트 상품6, price=10006, stockNumber=100, itemDetail=테스트 상품 상세 설명6, itemSellStatus=SELL)
+Item(id=35, itemNm=테스트 상품6, price=10006, stockNumber=100, itemDetail=테스트 상품 상세 설명6, itemSellStatus=SELL)
+Item(id=45, itemNm=테스트 상품6, price=10006, stockNumber=100, itemDetail=테스트 상품 상세 설명6, itemSellStatus=SELL)
+Item(id=56, itemNm=테스트 상품6, price=10006, stockNumber=100, itemDetail=테스트 상품 상세 설명6, itemSellStatus=SELL)
+Item(id=14, itemNm=테스트 상품5, price=10005, stockNumber=100, itemDetail=테스트 상품 상세 설명5, itemSellStatus=SELL)
+Item(id=24, itemNm=테스트 상품5, price=10005, stockNumber=100, itemDetail=테스트 상품 상세 설명5, itemSellStatus=SELL)
+Item(id=34, itemNm=테스트 상품5, price=10005, stockNumber=100, itemDetail=테스트 상품 상세 설명5, itemSellStatus=SELL)
+Item(id=44, itemNm=테스트 상품5, price=10005, stockNumber=100, itemDetail=테스트 상품 상세 설명5, itemSellStatus=SELL)
+Item(id=55, itemNm=테스트 상품5, price=10005, stockNumber=100, itemDetail=테스트 상품 상세 설명5, itemSellStatus=SELL)
+Item(id=13, itemNm=테스트 상품4, price=10004, stockNumber=100, itemDetail=테스트 상품 상세 설명4, itemSellStatus=SELL)
+Item(id=23, itemNm=테스트 상품4, price=10004, stockNumber=100, itemDetail=테스트 상품 상세 설명4, itemSellStatus=SELL)
+Item(id=33, itemNm=테스트 상품4, price=10004, stockNumber=100, itemDetail=테스트 상품 상세 설명4, itemSellStatus=SELL)
+Item(id=43, itemNm=테스트 상품4, price=10004, stockNumber=100, itemDetail=테스트 상품 상세 설명4, itemSellStatus=SELL)
+Item(id=54, itemNm=테스트 상품4, price=10004, stockNumber=100, itemDetail=테스트 상품 상세 설명4, itemSellStatus=SELL)
+Item(id=12, itemNm=테스트 상품3, price=10003, stockNumber=100, itemDetail=테스트 상품 상세 설명3, itemSellStatus=SELL)
+Item(id=22, itemNm=테스트 상품3, price=10003, stockNumber=100, itemDetail=테스트 상품 상세 설명3, itemSellStatus=SELL)
+Item(id=32, itemNm=테스트 상품3, price=10003, stockNumber=100, itemDetail=테스트 상품 상세 설명3, itemSellStatus=SELL)
+Item(id=42, itemNm=테스트 상품3, price=10003, stockNumber=100, itemDetail=테스트 상품 상세 설명3, itemSellStatus=SELL)
+Item(id=53, itemNm=테스트 상품3, price=10003, stockNumber=100, itemDetail=테스트 상품 상세 설명3, itemSellStatus=SELL)
+Item(id=11, itemNm=테스트 상품2, price=10002, stockNumber=100, itemDetail=테스트 상품 상세 설명2, itemSellStatus=SELL)
+Item(id=21, itemNm=테스트 상품2, price=10002, stockNumber=100, itemDetail=테스트 상품 상세 설명2, itemSellStatus=SELL)
+Item(id=31, itemNm=테스트 상품2, price=10002, stockNumber=100, itemDetail=테스트 상품 상세 설명2, itemSellStatus=SELL)
+Item(id=41, itemNm=테스트 상품2, price=10002, stockNumber=100, itemDetail=테스트 상품 상세 설명2, itemSellStatus=SELL)
+Item(id=52, itemNm=테스트 상품2, price=10002, stockNumber=100, itemDetail=테스트 상품 상세 설명2, itemSellStatus=SELL)
+Item(id=10, itemNm=테스트 상품1, price=10001, stockNumber=100, itemDetail=테스트 상품 상세 설명1, itemSellStatus=SELL)
+Item(id=20, itemNm=테스트 상품1, price=10001, stockNumber=100, itemDetail=테스트 상품 상세 설명1, itemSellStatus=SELL)
+Item(id=30, itemNm=테스트 상품1, price=10001, stockNumber=100, itemDetail=테스트 상품 상세 설명1, itemSellStatus=SELL)
+Item(id=40, itemNm=테스트 상품1, price=10001, stockNumber=100, itemDetail=테스트 상품 상세 설명1, itemSellStatus=SELL)
+Item(id=51, itemNm=테스트 상품1, price=10001, stockNumber=100, itemDetail=테스트 상품 상세 설명1, itemSellStatus=SELL)
+Item(id=50, itemNm=테스트 상품, price=10000, stockNumber=100, itemDetail=테스트 상품 상세 설명, itemSellStatus=SELL)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Item(id=71, itemNm=테스트 상품, price=10000, stockNumber=100, itemDetail=테스트 상품 상세 설명, itemSellStatus=SELL)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    select
+        i1_0.item_id,
+        i1_0.created_by,
+        i1_0.item_detail,
+        i1_0.item_nm,
+        i1_0.item_sell_status,
+        i1_0.modified_by,
+        i1_0.price,
+        i1_0.reg_time,
+        i1_0.stock_number,
+        i1_0.update_time 
+    from
+        item i1_0 
+    where
+        i1_0.item_detail like ? escape '!' 
+        and i1_0.price&gt;? 
+        and i1_0.item_sell_status=? offset ? rows fetch first ? rows only
+Hibernate: 
+    select
+        count(i1_0.item_id) 
+    from
+        item i1_0 
+    where
+        i1_0.item_detail like ? escape '!' 
+        and i1_0.price&gt;? 
+        and i1_0.item_sell_status=?
+total elements : 44
+Item(id=13, itemNm=테스트 상품4, price=10004, stockNumber=100, itemDetail=테스트 상품 상세 설명4, itemSellStatus=SELL)
+Item(id=14, itemNm=테스트 상품5, price=10005, stockNumber=100, itemDetail=테스트 상품 상세 설명5, itemSellStatus=SELL)
+Item(id=15, itemNm=테스트 상품6, price=10006, stockNumber=100, itemDetail=테스트 상품 상세 설명6, itemSellStatus=SELL)
+Item(id=16, itemNm=테스트 상품7, price=10007, stockNumber=100, itemDetail=테스트 상품 상세 설명7, itemSellStatus=SELL)
+Item(id=17, itemNm=테스트 상품8, price=10008, stockNumber=100, itemDetail=테스트 상품 상세 설명8, itemSellStatus=SELL)
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 8.2.1</a> at 2023. 10. 20. 오전 12:57:32</p>
+</div>
+</div>
+</body>
+</html>

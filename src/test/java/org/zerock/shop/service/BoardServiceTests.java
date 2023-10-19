@@ -39,7 +39,7 @@ public class BoardServiceTests {
 
         // 변경에 필요한 데이터만
         BoardDto boardDto = BoardDto.builder()
-                .bno(101L)
+                .bno(100L)
                 .title("Updated....101")
                 .content("Updated content 101...")
                 .build();

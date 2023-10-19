@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - CartTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>CartTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/org.zerock.shop.entity.html">org.zerock.shop.entity</a> &gt; CartTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">1</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.169s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Method name</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">장바구니 회원 엔티티 매핑 조회 테스트</td>
+<td class="success">findCartAndMemberTest()</td>
+<td class="success">0.169s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>2023-10-20T00:57:27.681+09:00  INFO 1440 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [org.zerock.shop.entity.CartTest]: CartTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-10-20T00:57:27.711+09:00  INFO 1440 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration org.zerock.shop.ShopApplication for test class org.zerock.shop.entity.CartTest
+  _     _      _     _      _     _      _     _      _     _      _     _      _     _      _     _
+  (c).-.(c)    (c).-.(c)    (c).-.(c)    (c).-.(c)    (c).-.(c)    (c).-.(c)    (c).-.(c)    (c).-.(c)
+   / ._. \      / ._. \      / ._. \      / ._. \      / ._. \      / ._. \      / ._. \      / ._. \
+ __\( Y )/__  __\( Y )/__  __\( Y )/__  __\( Y )/__  __\( Y )/__  __\( Y )/__  __\( Y )/__  __\( Y )/__
+(_.-/'-'\-._)(_.-/'-'\-._)(_.-/'-'\-._)(_.-/'-'\-._)(_.-/'-'\-._)(_.-/'-'\-._)(_.-/'-'\-._)(_.-/'-'\-._)
+   || C ||      || S ||      || H ||      || C ||      || L ||      || O ||      || U ||      || D ||
+ _.' `-' '._  _.' `-' '._  _.' `-' '._  _.' `-' '._  _.' `-' '._  _.' `-' '._  _.' `-' '._  _.' `-' '._
+(.-./`-'\.-.)(.-./`-`\.-.)(.-./`-'\.-.)(.-./`-'\.-.)(.-./`-'\.-.)(.-./`-'\.-.)(.-./`-'\.-.)(.-./`-'\.-.)
+ `-'     `-'  `-'     `-'  `-'     `-'  `-'     `-'  `-'     `-'  `-'     `-'  `-'     `-'  `-'     `-'
+ 
+Powered by Spring Boot 3.1.3
+2023-10-20T00:57:27.750+09:00  INFO 1440 --- [    Test worker] o.z.s.e.CartTest                         : Starting CartTest using Java 17.0.8 with PID 1440 (started by kkw in D:\workspace\shop)
+2023-10-20T00:57:27.750+09:00  INFO 1440 --- [    Test worker] o.z.s.e.CartTest                         : No active profile set, falling back to 1 default profile: &quot;default&quot;
+2023-10-20T00:57:28.085+09:00  INFO 1440 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-10-20T00:57:28.138+09:00  INFO 1440 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 52 ms. Found 9 JPA repository interfaces.
+2023-10-20T00:57:28.251+09:00  INFO 1440 --- [    Test worker] o.h.j.i.u.LogHelper                      : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-10-20T00:57:28.264+09:00  INFO 1440 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-10-20T00:57:28.265+09:00  INFO 1440 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-10-20T00:57:28.267+09:00  INFO 1440 --- [    Test worker] c.z.h.HikariDataSource                   : HikariPool-3 - Starting...
+2023-10-20T00:57:28.268+09:00  INFO 1440 --- [    Test worker] c.z.h.p.HikariPool                       : HikariPool-3 - Added connection conn10: url=jdbc:h2:mem:test user=SA
+2023-10-20T00:57:28.269+09:00  INFO 1440 --- [    Test worker] c.z.h.HikariDataSource                   : HikariPool-3 - Start completed.
+2023-10-20T00:57:28.345+09:00  INFO 1440 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-10-20T00:57:28.495+09:00  INFO 1440 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+Hibernate: 
+    alter table if exists board 
+       alter column reg_time set data type timestamp(6)
+Hibernate: 
+    alter table if exists board 
+       alter column update_time set data type timestamp(6)
+Hibernate: 
+    alter table if exists cart 
+       alter column reg_time set data type timestamp(6)
+Hibernate: 
+    alter table if exists cart 
+       alter column update_time set data type timestamp(6)
+Hibernate: 
+    alter table if exists cart_item 
+       alter column reg_time set data type timestamp(6)
+Hibernate: 
+    alter table if exists cart_item 
+       alter column update_time set data type timestamp(6)
+Hibernate: 
+    alter table if exists item 
+       alter column reg_time set data type timestamp(6)
+Hibernate: 
+    alter table if exists item 
+       alter column update_time set data type timestamp(6)
+Hibernate: 
+    alter table if exists item 
+       alter column item_detail set data type clob
+Hibernate: 
+    alter table if exists item_img 
+       alter column reg_time set data type timestamp(6)
+Hibernate: 
+    alter table if exists item_img 
+       alter column update_time set data type timestamp(6)
+Hibernate: 
+    alter table if exists member 
+       alter column reg_time set data type timestamp(6)
+Hibernate: 
+    alter table if exists member 
+       alter column update_time set data type timestamp(6)
+Hibernate: 
+    alter table if exists order_item 
+       alter column reg_time set data type timestamp(6)
+Hibernate: 
+    alter table if exists order_item 
+       alter column update_time set data type timestamp(6)
+Hibernate: 
+    alter table if exists orders 
+       alter column reg_time set data type timestamp(6)
+Hibernate: 
+    alter table if exists orders 
+       alter column update_time set data type timestamp(6)
+Hibernate: 
+    alter table if exists orders 
+       alter column order_date set data type timestamp(6)
+Hibernate: 
+    alter table if exists reply 
+       alter column reg_time set data type timestamp(6)
+Hibernate: 
+    alter table if exists reply 
+       alter column update_time set data type timestamp(6)
+2023-10-20T00:57:28.515+09:00  INFO 1440 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-10-20T00:57:29.739+09:00  INFO 1440 --- [    Test worker] o.s.s.w.DefaultSecurityFilterChain       : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@50cf60d, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@332f2b1b, org.springframework.security.web.context.SecurityContextHolderFilter@605d010e, org.springframework.security.web.header.HeaderWriterFilter@c95132f, org.springframework.security.web.csrf.CsrfFilter@2d6a3255, org.springframework.security.web.authentication.logout.LogoutFilter@5466b206, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@316a06f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1cd97fca, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7893e5a8, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2a2181d5, org.springframework.security.web.access.ExceptionTranslationFilter@6210d7de, org.springframework.security.web.access.intercept.AuthorizationFilter@641b8e0a]
+2023-10-20T00:57:29.742+09:00  WARN 1440 --- [    Test worker] o.s.s.c.a.w.b.WebSecurity                : You are asking Spring Security to ignore Ant [pattern='/h2-console/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-10-20T00:57:29.742+09:00  INFO 1440 --- [    Test worker] o.s.s.w.DefaultSecurityFilterChain       : Will not secure Ant [pattern='/h2-console/**']
+2023-10-20T00:57:29.742+09:00  WARN 1440 --- [    Test worker] o.s.s.c.a.w.b.WebSecurity                : You are asking Spring Security to ignore Ant [pattern='/v3/api-docs/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-10-20T00:57:29.742+09:00  INFO 1440 --- [    Test worker] o.s.s.w.DefaultSecurityFilterChain       : Will not secure Ant [pattern='/v3/api-docs/**']
+2023-10-20T00:57:29.742+09:00  WARN 1440 --- [    Test worker] o.s.s.c.a.w.b.WebSecurity                : You are asking Spring Security to ignore Ant [pattern='/swagger*/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-10-20T00:57:29.742+09:00  INFO 1440 --- [    Test worker] o.s.s.w.DefaultSecurityFilterChain       : Will not secure Ant [pattern='/swagger*/**']
+2023-10-20T00:57:29.742+09:00  WARN 1440 --- [    Test worker] o.s.s.c.a.w.b.WebSecurity                : You are asking Spring Security to ignore Ant [pattern='/**', OPTIONS]. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-10-20T00:57:29.742+09:00  INFO 1440 --- [    Test worker] o.s.s.w.DefaultSecurityFilterChain       : Will not secure Ant [pattern='/**', OPTIONS]
+2023-10-20T00:57:29.742+09:00  WARN 1440 --- [    Test worker] o.s.s.c.a.w.b.WebSecurity                : You are asking Spring Security to ignore Ant [pattern='/swagger-ui.html']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-10-20T00:57:29.742+09:00  INFO 1440 --- [    Test worker] o.s.s.w.DefaultSecurityFilterChain       : Will not secure Ant [pattern='/swagger-ui.html']
+2023-10-20T00:57:29.742+09:00  WARN 1440 --- [    Test worker] o.s.s.c.a.w.b.WebSecurity                : You are asking Spring Security to ignore Ant [pattern='/webjars/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-10-20T00:57:29.742+09:00  INFO 1440 --- [    Test worker] o.s.s.w.DefaultSecurityFilterChain       : Will not secure Ant [pattern='/webjars/**']
+2023-10-20T00:57:29.742+09:00  WARN 1440 --- [    Test worker] o.s.s.c.a.w.b.WebSecurity                : You are asking Spring Security to ignore Ant [pattern='/swagger-resources/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-10-20T00:57:29.742+09:00  INFO 1440 --- [    Test worker] o.s.s.w.DefaultSecurityFilterChain       : Will not secure Ant [pattern='/swagger-resources/**']
+2023-10-20T00:57:29.742+09:00  WARN 1440 --- [    Test worker] o.s.s.c.a.w.b.WebSecurity                : You are asking Spring Security to ignore Ant [pattern='/configuration/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-10-20T00:57:29.742+09:00  INFO 1440 --- [    Test worker] o.s.s.w.DefaultSecurityFilterChain       : Will not secure Ant [pattern='/configuration/**']
+2023-10-20T00:57:29.742+09:00  WARN 1440 --- [    Test worker] o.s.s.c.a.w.b.WebSecurity                : You are asking Spring Security to ignore Ant [pattern='/replies/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-10-20T00:57:29.747+09:00  INFO 1440 --- [    Test worker] o.s.s.w.DefaultSecurityFilterChain       : Will not secure Ant [pattern='/replies/**']
+2023-10-20T00:57:29.747+09:00  WARN 1440 --- [    Test worker] o.s.s.c.a.w.b.WebSecurity                : You are asking Spring Security to ignore Ant [pattern='/css/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-10-20T00:57:29.747+09:00  INFO 1440 --- [    Test worker] o.s.s.w.DefaultSecurityFilterChain       : Will not secure Ant [pattern='/css/**']
+2023-10-20T00:57:29.747+09:00  WARN 1440 --- [    Test worker] o.s.s.c.a.w.b.WebSecurity                : You are asking Spring Security to ignore Ant [pattern='/js/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-10-20T00:57:29.748+09:00  INFO 1440 --- [    Test worker] o.s.s.w.DefaultSecurityFilterChain       : Will not secure Ant [pattern='/js/**']
+2023-10-20T00:57:29.749+09:00  WARN 1440 --- [    Test worker] o.s.s.c.a.w.b.WebSecurity                : You are asking Spring Security to ignore Ant [pattern='/images/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-10-20T00:57:29.749+09:00  INFO 1440 --- [    Test worker] o.s.s.w.DefaultSecurityFilterChain       : Will not secure Ant [pattern='/images/**']
+2023-10-20T00:57:29.749+09:00  WARN 1440 --- [    Test worker] o.s.s.c.a.w.b.WebSecurity                : You are asking Spring Security to ignore Ant [pattern='/img/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-10-20T00:57:29.749+09:00  INFO 1440 --- [    Test worker] o.s.s.w.DefaultSecurityFilterChain       : Will not secure Ant [pattern='/img/**']
+2023-10-20T00:57:29.855+09:00  INFO 1440 --- [    Test worker] o.z.s.e.CartTest                         : Started CartTest in 2.138 seconds (process running for 26.778)
+Hibernate: 
+    select
+        next value for member_seq
+Hibernate: 
+    select
+        next value for cart_seq
+Hibernate: 
+    insert 
+    into
+        member
+        (address,created_by,email,modified_by,name,password,reg_time,role,update_time,member_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        cart
+        (created_by,member_id,modified_by,reg_time,update_time,cart_id) 
+    values
+        (?,?,?,?,?,?)
+Hibernate: 
+    select
+        c1_0.cart_id,
+        c1_0.created_by,
+        c1_0.member_id,
+        c1_0.modified_by,
+        c1_0.reg_time,
+        c1_0.update_time 
+    from
+        cart c1_0 
+    where
+        c1_0.cart_id=?
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 8.2.1</a> at 2023. 10. 20. 오전 12:57:32</p>
+</div>
+</div>
+</body>
+</html>

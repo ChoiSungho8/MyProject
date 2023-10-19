@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.zerock.shop.repository.ReplyRepositoryTests" tests="2" skipped="0" failures="0" errors="0" timestamp="2023-10-19T15:57:31" hostname="10-5" time="0.04">
+  <properties/>
+  <testcase name="testBoardReplies()" classname="org.zerock.shop.repository.ReplyRepositoryTests" time="0.026"/>
+  <testcase name="testInsert()" classname="org.zerock.shop.repository.ReplyRepositoryTests" time="0.013"/>
+  <system-out><![CDATA[2023-10-20T00:57:31.847+09:00  INFO 1440 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [org.zerock.shop.repository.ReplyRepositoryTests]: ReplyRepositoryTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-10-20T00:57:31.849+09:00  INFO 1440 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration org.zerock.shop.ShopApplication for test class org.zerock.shop.repository.ReplyRepositoryTests
+Hibernate: 
+    select
+        r1_0.rno,
+        r1_0.board_bno,
+        r1_0.created_by,
+        r1_0.modified_by,
+        r1_0.reg_time,
+        r1_0.reply_text,
+        r1_0.replyer,
+        r1_0.update_time 
+    from
+        reply r1_0 
+    where
+        r1_0.board_bno=? 
+    order by
+        r1_0.rno desc limit ?,
+        ?
+Hibernate: 
+    select
+        count(r1_0.rno) 
+    from
+        reply r1_0 
+    where
+        r1_0.board_bno=?
+Hibernate: 
+    select
+        b1_0.bno,
+        b1_0.content,
+        b1_0.created_by,
+        b1_0.modified_by,
+        b1_0.reg_time,
+        b1_0.title,
+        b1_0.update_time,
+        b1_0.writer 
+    from
+        board b1_0 
+    where
+        b1_0.bno=?
+2023-10-20T00:57:31.874+09:00  INFO 1440 --- [    Test worker] o.z.s.r.ReplyRepositoryTests             : Reply(rno=52, board=Board(bno=100, title=update..title 100, content=update content 100, writer=user0), replyText=ReplyDto Text, replyer=replyer)
+2023-10-20T00:57:31.877+09:00  INFO 1440 --- [    Test worker] o.z.s.r.ReplyRepositoryTests             : Reply(rno=51, board=Board(bno=100, title=update..title 100, content=update content 100, writer=user0), replyText=�뙎湲�....., replyer=replyer1)
+2023-10-20T00:57:31.878+09:00  INFO 1440 --- [    Test worker] o.z.s.r.ReplyRepositoryTests             : Reply(rno=50, board=Board(bno=100, title=update..title 100, content=update content 100, writer=user0), replyText=ReplyDto Text, replyer=replyer)
+2023-10-20T00:57:31.878+09:00  INFO 1440 --- [    Test worker] o.z.s.r.ReplyRepositoryTests             : Reply(rno=49, board=Board(bno=100, title=update..title 100, content=update content 100, writer=user0), replyText=�뙎湲�....., replyer=replyer1)
+2023-10-20T00:57:31.878+09:00  INFO 1440 --- [    Test worker] o.z.s.r.ReplyRepositoryTests             : Reply(rno=48, board=Board(bno=100, title=update..title 100, content=update content 100, writer=user0), replyText=ReplyDto Text, replyer=replyer)
+2023-10-20T00:57:31.878+09:00  INFO 1440 --- [    Test worker] o.z.s.r.ReplyRepositoryTests             : Reply(rno=47, board=Board(bno=100, title=update..title 100, content=update content 100, writer=user0), replyText=�뙎湲�....., replyer=replyer1)
+2023-10-20T00:57:31.878+09:00  INFO 1440 --- [    Test worker] o.z.s.r.ReplyRepositoryTests             : Reply(rno=46, board=Board(bno=100, title=update..title 100, content=update content 100, writer=user0), replyText=ReplyDto Text, replyer=replyer)
+2023-10-20T00:57:31.878+09:00  INFO 1440 --- [    Test worker] o.z.s.r.ReplyRepositoryTests             : Reply(rno=45, board=Board(bno=100, title=update..title 100, content=update content 100, writer=user0), replyText=�뙎湲�....., replyer=replyer1)
+2023-10-20T00:57:31.878+09:00  INFO 1440 --- [    Test worker] o.z.s.r.ReplyRepositoryTests             : Reply(rno=44, board=Board(bno=100, title=update..title 100, content=update content 100, writer=user0), replyText=ReplyDto Text, replyer=replyer)
+2023-10-20T00:57:31.878+09:00  INFO 1440 --- [    Test worker] o.z.s.r.ReplyRepositoryTests             : Reply(rno=43, board=Board(bno=100, title=update..title 100, content=update content 100, writer=user0), replyText=�뙎湲�....., replyer=replyer1)
+Hibernate: 
+    insert 
+    into
+        reply
+        (board_bno,created_by,modified_by,reg_time,reply_text,replyer,update_time) 
+    values
+        (?,?,?,?,?,?,?)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

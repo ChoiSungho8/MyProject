@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.zerock.shop.service.CartServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-10-19T15:57:32" hostname="10-5" time="0.031">
+  <properties/>
+  <testcase name="장바구니 담기 테스트" classname="org.zerock.shop.service.CartServiceTest" time="0.031"/>
+  <system-out><![CDATA[2023-10-20T00:57:32.055+09:00  INFO 1440 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [org.zerock.shop.service.CartServiceTest]: CartServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-10-20T00:57:32.057+09:00  INFO 1440 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration org.zerock.shop.ShopApplication for test class org.zerock.shop.service.CartServiceTest
+Hibernate: 
+    insert 
+    into
+        item
+        (created_by,item_detail,item_nm,item_sell_status,modified_by,price,reg_time,stock_number,update_time,item_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    insert 
+    into
+        member
+        (address,created_by,email,modified_by,name,password,reg_time,role,update_time,member_id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?)
+Hibernate: 
+    select
+        m1_0.member_id,
+        m1_0.address,
+        m1_0.created_by,
+        m1_0.email,
+        m1_0.modified_by,
+        m1_0.name,
+        m1_0.password,
+        m1_0.reg_time,
+        m1_0.role,
+        m1_0.update_time 
+    from
+        member m1_0 
+    where
+        m1_0.email=?
+Hibernate: 
+    select
+        c1_0.cart_id,
+        c1_0.created_by,
+        c1_0.member_id,
+        c1_0.modified_by,
+        c1_0.reg_time,
+        c1_0.update_time 
+    from
+        cart c1_0 
+    where
+        c1_0.member_id=?
+Hibernate: 
+    select
+        next value for cart_seq
+Hibernate: 
+    select
+        c1_0.cart_item_id,
+        c1_0.cart_id,
+        c1_0.count,
+        c1_0.created_by,
+        c1_0.item_id,
+        c1_0.modified_by,
+        c1_0.reg_time,
+        c1_0.update_time 
+    from
+        cart_item c1_0 
+    where
+        c1_0.cart_id=? 
+        and c1_0.item_id=?
+Hibernate: 
+    select
+        next value for cart_item_seq
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
