@@ -50,12 +50,12 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http.formLogin(formLogin -> formLogin
-                .loginPage("/members/login")
+                .loginPage("/member/login")
                 .defaultSuccessUrl("/", true)
                 .usernameParameter("email")
-                .failureUrl("/members/login/error"))
+                .failureUrl("/member/login/error"))
                 .logout(logout -> logout
-                        .logoutRequestMatcher(AntPathRequestMatcher.antMatcher("/members/logout"))
+                        .logoutRequestMatcher(AntPathRequestMatcher.antMatcher("/member/logout"))
                         .logoutSuccessUrl("/"))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/")).permitAll()
