@@ -2,6 +2,7 @@ package org.zerock.shop.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -30,6 +31,11 @@ public class SecurityConfig {
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**"))
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/v3/api-docs/**"))
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/swagger*/**"))
+                .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.OPTIONS, "/**"))
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/swagger-ui.html"))
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/webjars/**"))
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/swagger-resources/**"))
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/configuration/**"))
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/replies/**"))
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/css/**"))
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/js/**"))

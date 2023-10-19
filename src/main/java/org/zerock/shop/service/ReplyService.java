@@ -17,7 +17,7 @@ public interface ReplyService {
     void modify(ReplyDto replyDto);
 
     // 댓글 삭제 처리
-    void delete(Long rno);
+    void remove(Long rno);
 
     // 특정 게시물의 댓글 목록 페이징 처리
     PageResponseDto<ReplyDto> getListOfBoard(Long bno, PageRequestDto pageRequestDto);

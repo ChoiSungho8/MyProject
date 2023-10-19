@@ -63,7 +63,7 @@ public class ReplyServiceImpl implements ReplyService {
     }
 
     @Override
-    public void delete(Long rno) {
+    public void remove(Long rno) {
 
         replyRepository.deleteById(rno);
 
