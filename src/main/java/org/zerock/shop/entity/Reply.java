@@ -23,4 +23,9 @@ public class Reply extends BaseEntity {
 
     private String replyer;
 
+    // 댓글을 수정하는 경우에는 Reply 객체에서 replyText만을 수정할 수 있음
+    public void changeText(String text) {
+        this.replyText = text;
+    }
+    
 }

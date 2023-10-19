@@ -43,27 +43,28 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http.formLogin(formLogin -> formLogin
-                .loginPage("/member/login")
+                .loginPage("/members/login")
                 .defaultSuccessUrl("/", true)
                 .usernameParameter("email")
-                .failureUrl("/member/login/error"))
+                .failureUrl("/members/login/error"))
                 .logout(logout -> logout
-                        .logoutRequestMatcher(AntPathRequestMatcher.antMatcher("/member/logout"))
+                        .logoutRequestMatcher(AntPathRequestMatcher.antMatcher("/members/logout"))
                         .logoutSuccessUrl("/"))
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(AntPathRequestMatcher.antMatcher("/")).permitAll()
-                        .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/swagger*/**")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/replies/**")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/css/**")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/js/**")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/images/**")).permitAll()
-                        .requestMatchers(AntPathRequestMatcher.antMatcher("/img/**")).permitAll()
-                        .requestMatchers(AntPathRequestMatcher.antMatcher("/board/**")).permitAll()
-                        .requestMatchers(AntPathRequestMatcher.antMatcher("/member/**")).permitAll()
-                        .requestMatchers(AntPathRequestMatcher.antMatcher("/item/**")).permitAll()
-                        .requestMatchers(AntPathRequestMatcher.antMatcher("/replies/**")).permitAll()
-                        .requestMatchers(AntPathRequestMatcher.antMatcher("/admin/**")).hasRole("ADMIN")
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/swagger*/**")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/img/**")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/v3/api-docs/**")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/board/**")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/members/**")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/item/**")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/admin/**")).hasRole("ADMIN")
                         .anyRequest().authenticated())
                 // 인증 되지 않은 사용자가 리소스에 접근하였을 대 수행되는 핸들러를 등록합니다.
                 .exceptionHandling(exceptionHandling -> exceptionHandling

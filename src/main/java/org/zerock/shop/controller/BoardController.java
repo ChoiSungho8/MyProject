@@ -8,7 +8,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.shop.dto.BoardDto;
 import org.zerock.shop.dto.BoardListReplyCountDto;
@@ -16,7 +15,7 @@ import org.zerock.shop.dto.PageRequestDto;
 import org.zerock.shop.dto.PageResponseDto;
 import org.zerock.shop.service.BoardService;
 
-@RestController
+@Controller
 @RequestMapping("/board")
 @Log4j2
 @RequiredArgsConstructor
