@@ -56,6 +56,8 @@ public class SecurityConfig {
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/member/**")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/board/**")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/item/**")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/cart/**")).hasRole("USER")
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/order/**")).hasRole("USER")
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/admin/**")).hasRole("ADMIN")
                         .anyRequest().authenticated())
                 // 인증 되지 않은 사용자가 리소스에 접근하였을 대 수행되는 핸들러를 등록합니다.
@@ -66,13 +68,13 @@ public class SecurityConfig {
 
        /* http
                 // .csrf(이곳에 CSRF 설정을 위한 함수)
-                .csrf(AbstractHttpConfigurer::disable)
+                .csrf(AbstractHttpConfigurer::
 
                 // .sessionManagement(이곳에 세션 설정을 위한 함수)
                 // session 사용하지 않으므로 무상태설정
                 .sessionManagement((sessionManagement) ->
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                )
+                )disable)
 
                 // .authorizeHttpRequest(이곳에 인가 설정을 위한 함수);
                 // http.authorizeRequests() : 보안 설정을 하겠다는 의미,

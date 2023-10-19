@@ -69,6 +69,7 @@ public class ReplyServiceImpl implements ReplyService {
 
     }
 
+    // 특정 게시물의 댓글 목록 처리
     @Override
     public PageResponseDto<ReplyDto> getListOfBoard(Long bno, PageRequestDto pageRequestDto) {
 

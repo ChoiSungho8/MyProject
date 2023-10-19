@@ -46,7 +46,7 @@ public class ReplyController {
 
     }
 
-    // 특정 게시물 댓글 목록 처리
+    // 특정 게시물의 댓글 목록
     @Operation(summary = "Replies of Board", description = "GET 방식으로 특정 게시물의 댓글 목록")
     @GetMapping(value = "/list/{bno}")
     public PageResponseDto<ReplyDto> getList(@PathVariable("bno") Long bno, PageRequestDto pageRequestDto) {
