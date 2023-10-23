@@ -32,6 +32,7 @@ public class SecurityConfig {
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/v3/api-docs/**"))
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/swagger*/**"))
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/replies/**"))
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/upload/**"))
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/css/**"))
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/js/**"))
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/images/**"))

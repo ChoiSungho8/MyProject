@@ -91,6 +91,10 @@ dependencies {
     // Thymeleaf Layout Dialect 의존성 추가
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
 
+    // Thumbnailator : 첨부 파일이 이미지일 때는 용량을 줄여서 작은 이미지(이하 섬네일)를 생성하고
+    // 이를 나중에 사용하도록 구성해야만 한다. 이를 처리하기 위해 Thumbnailator 라이브러리 이용
+    implementation 'net.coobird:thumbnailator:0.4.16'
+    
 }
 
 test {
