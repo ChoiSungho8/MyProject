@@ -1,5 +1,7 @@
 package org.zerock.shop.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -26,6 +28,10 @@ public class ReplyDto {
     @NotEmpty
     private String replyer;
 
-    private LocalDateTime regTime, updateTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") // JSON 처리 시에 포맷팅
+    private LocalDateTime regTime;
+    
+    @JsonIgnore // JSON으로 변환될 때 제외
+    private LocalDateTime updateTime;
 
 }
