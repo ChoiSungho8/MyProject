@@ -2,7 +2,6 @@ package org.zerock.shop.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -33,6 +32,9 @@ public class SecurityConfig {
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/swagger*/**"))
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/css/**"))
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/js/**"))
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/upload/**"))
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/view/**"))
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/remove/**"))
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/images/**"))
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/img/**"));
     }
@@ -56,7 +58,7 @@ public class SecurityConfig {
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/member/**")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/board/**")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/item/**")).permitAll()
-                        .requestMatchers(AntPathRequestMatcher.antMatcher("/replies/**")).hasAnyRole("USER","ADMIN")
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/replies/**")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/cart/**")).hasRole("USER")
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/order/**")).hasRole("USER")
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/admin/**")).hasRole("ADMIN")

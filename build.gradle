@@ -33,7 +33,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
 
     // Swagger UI 준비
-    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
 
     // log4j2, test log4j2 추가
     implementation 'org.springframework.boot:spring-boot-starter-log4j2'
@@ -93,7 +93,7 @@ dependencies {
 
     // Thumbnailator : 첨부 파일이 이미지일 때는 용량을 줄여서 작은 이미지(이하 섬네일)를 생성하고
     // 이를 나중에 사용하도록 구성해야만 한다. 이를 처리하기 위해 Thumbnailator 라이브러리 이용
-    implementation 'net.coobird:thumbnailator:0.4.16'
+    implementation 'net.coobird:thumbnailator:0.4.19'
     
 }
 

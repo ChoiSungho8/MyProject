@@ -31,8 +31,17 @@
     }
   </style>
 </th:block>
-
 <div layout:fragment="content">
+
+<div class="float-right">
+  <form class="form-inline my-2 my-lg-0" th:action="@{/}" method="get">
+    <input name="searchQuery" class="form-control mr-sm-2" type="search"
+           placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+      Search
+    </button>
+  </form>
+</div>
 
   <!-- 부트스트랩의 슬라이드를 보여주는 Carousel 컴포넌트를 이용하여 배너를 만들었습니다. 쇼핑몰의 경우 보통 현재 행사 중인 상품을 광고하는데 사용합니다. -->
   <!--<div id="carouselControls" class="carousel slide margin" data-ride="carousel">

@@ -1,6 +1,7 @@
 package org.zerock.shop.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.extern.log4j.Log4j2;
 import net.coobird.thumbnailator.Thumbnailator;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,7 +32,7 @@ public class UpDownController {
 
     @Operation(summary = "Upload POST", description = "POST 방식으로 파일 등록")
     @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public String upload(UploadFileDto uploadFileDto) {
+    public String upload(@RequestBody UploadFileDto uploadFileDto) {
 
         log.info(uploadFileDto);
 
