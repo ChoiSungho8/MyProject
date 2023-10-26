@@ -32,7 +32,7 @@ public class UpDownController {
 
     @Operation(summary = "Upload POST", description = "POST 방식으로 파일 등록")
     @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public String upload(@RequestBody UploadFileDto uploadFileDto) {
+    public List<UploadResultDto> upload(@RequestBody UploadFileDto uploadFileDto) {
 
         log.info(uploadFileDto);
 
@@ -78,7 +78,7 @@ public class UpDownController {
 
             }); // end each
 
-            return list.toString();
+            return list;
 
         } // end if
 
