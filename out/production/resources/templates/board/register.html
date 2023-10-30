@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layout1}">
 <head>
@@ -27,7 +28,8 @@
 
             <div class="input-group mb-3">
               <span class="input-group-text">Writer</span>
-              <input type="text" name="writer" class="form-control" placeholder="Writer"/>
+              <input type="text" name="writer" class="form-control" placeholder="Writer"
+                     th:value="${#authentication.principal.username}" readonly />
             </div>
 
             <div class="input-group mb-3">
@@ -85,6 +87,9 @@
   <script src="/js/upload.js"></script>
 
 <script layout:fragment="script" th:inline="javascript">
+
+  // 현재 사용자 정보를 이용해야 한다면 ${#authentication.principal}을 이용해서 필요한 정보를 활용
+  const auth = [[${#authentication.principal}]]
 
   // @Valid의 에러 메시지 처리
   const errors = [[${errors}]]
@@ -150,14 +155,14 @@
   function showUploadFile({uuid, fileName, link}){
 
     const str =`<div class="card col-4">
-            <div class="card-header d-flex justify-content-center">
-                ${fileName}
-                <button class="btn-sm btn-danger" onclick="javascript:removeFile('${uuid}', '${fileName}', this)" >X</button>
-            </div>
-            <div class="card-body">
-                 <img src="/view/${link}" data-src="${uuid + "_" + fileName}" alt="파일 업로드" >
-            </div>
-        </div><!-- card -->`
+                    <div class="card-header d-flex justify-content-center">
+                        ${fileName}
+                        <button class="btn-sm btn-danger" onclick="javascript:removeFile('${uuid}', '${fileName}', this)" >X</button>
+                    </div>
+                    <div class="card-body">
+                        <img src="/view/${link}" data-src="${uuid + "_" + fileName}" alt="파일 업로드" />
+                    </div>
+                </div><!-- card -->`
 
     uploadResult.innerHTML += str
 

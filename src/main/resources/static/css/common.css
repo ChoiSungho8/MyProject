@@ -100,9 +100,9 @@ select {-webkit-appearance:none; height:30px; padding:0 5px; box-sizing:border-b
 /* common */
 html{height:100%;}
 body {height:100%; font-family:'Malgun Gothic','맑은 고딕',sans-serif; font-size:16px; letter-spacing:-1px; color:#444; white-space:normal; word-wrap:break-word;}
-input, select, textarea {box-sizing:border-box; font-size:15px; font-family:'Malgun Gothic','맑은 고딕',sans-serif; letter-spacing:-1px; color:#444; -webkit-appearance:none;}
+input, select, textarea {box-sizing:border-box; font-size:15px; font-family:'Malgun Gothic','맑은 고딕',sans-serif; letter-spacing:-1px; color:#444;}
 textarea {box-sizing:border-box; padding:10px; border:1px solid #ccc;}
-input, textarea {-webkit-appearance:none; border-radius:0;}
+input, textarea {border-radius:0;}
 * {-webkit-text-size-adjust:none;}
 .dp_none {display:none;}
 .hdd, legend {font-size:0; width:0; height:0; line-height:0; text-indent:-9999px; overflow:hidden; visibility:hidden; position:absolute; top:0; left:0;}

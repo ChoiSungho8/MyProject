@@ -8,36 +8,18 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.zerock.shop.config.security.handler.Custom403Handler;
 
 @Configuration
 @EnableWebSecurity // SpringSecurityFilterChain이 자동으로 포함
 public class SecurityConfig {
 
-    /*@Autowired
-    MemberService memberService;*/
-
     // BCryptPasswordEncoder의 해시 함수를 이용하여 비밀번호를 암호화하여 저장
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }
-
-    // static 디렉터리의 하위 파일은 인증을 무시하도록 설정
-    @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring()
-                .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**"))
-                .requestMatchers(AntPathRequestMatcher.antMatcher("/v3/api-docs/**"))
-                .requestMatchers(AntPathRequestMatcher.antMatcher("/swagger*/**"))
-                .requestMatchers(AntPathRequestMatcher.antMatcher("/css/**"))
-                .requestMatchers(AntPathRequestMatcher.antMatcher("/js/**"))
-                .requestMatchers(AntPathRequestMatcher.antMatcher("/upload/**"))
-                .requestMatchers(AntPathRequestMatcher.antMatcher("/view/**"))
-                .requestMatchers(AntPathRequestMatcher.antMatcher("/replies/**"))
-                .requestMatchers(AntPathRequestMatcher.antMatcher("/remove/**"))
-                .requestMatchers(AntPathRequestMatcher.antMatcher("/images/**"))
-                .requestMatchers(AntPathRequestMatcher.antMatcher("/img/**"));
     }
 
     // http 요청에 대한 보안을 설정합니다.
@@ -64,29 +46,35 @@ public class SecurityConfig {
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/admin/**")).hasRole("ADMIN")
                         .anyRequest().authenticated())
                 // 인증 되지 않은 사용자가 리소스에 접근하였을 대 수행되는 핸들러를 등록합니다.
+                // 로그인이 되었어도 권한이 없으면
                 .exceptionHandling(exceptionHandling -> exceptionHandling
+                        .accessDeniedHandler(accessDeniedHandler())
                 .authenticationEntryPoint(new CustomAuthenticationEntryPoint()));
 
         return http.build();
 
-       /* http
-                // .csrf(이곳에 CSRF 설정을 위한 함수)
-                .csrf(AbstractHttpConfigurer::
+    }
 
-                // .sessionManagement(이곳에 세션 설정을 위한 함수)
-                // session 사용하지 않으므로 무상태설정
-                .sessionManagement((sessionManagement) ->
-                        sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                )disable)
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler() {
+        return new Custom403Handler();
+    }
 
-                // .authorizeHttpRequest(이곳에 인가 설정을 위한 함수);
-                // http.authorizeRequests() : 보안 설정을 하겠다는 의미,
-                // http.anyRequest.permitAll() : 어떠한 요청에도 인증을 요구한다는 의미
-                .authorizeHttpRequests((authorizeRequests) ->
-                        authorizeRequests.anyRequest().permitAll()
-                );
-
-        return http.build();*/
+    // static 디렉터리의 하위 파일은 인증을 무시하도록 설정
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring()
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**"))
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/v3/api-docs/**"))
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/swagger*/**"))
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/css/**"))
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/js/**"))
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/upload/**"))
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/view/**"))
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/replies/**"))
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/remove/**"))
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/images/**"))
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/img/**"));
     }
 
 }
