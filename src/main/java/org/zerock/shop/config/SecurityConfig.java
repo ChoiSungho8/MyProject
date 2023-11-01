@@ -1,7 +1,9 @@
 package org.zerock.shop.config;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -9,12 +11,20 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.zerock.shop.config.security.handler.Custom403Handler;
 
+import javax.sql.DataSource;
+
 @Configuration
+@RequiredArgsConstructor
 @EnableWebSecurity // SpringSecurityFilterChain이 자동으로 포함
+@EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
+
+    private final DataSource dataSource;
 
     // BCryptPasswordEncoder의 해시 함수를 이용하여 비밀번호를 암호화하여 저장
     @Bean
@@ -36,11 +46,20 @@ public class SecurityConfig {
                 .logout(logout -> logout
                         .logoutRequestMatcher(AntPathRequestMatcher.antMatcher("/member/logout"))
                         .logoutSuccessUrl("/"))
+                // 자동 로그인
+                .rememberMe(rememberMe -> rememberMe
+                        .key("12345678")
+                        .tokenRepository(persistentTokenRepository())
+                        .tokenValiditySeconds(60*60*24*30))
+                // 소셜 로그인 설정
+                .oauth2Login(oauth -> oauth
+                        .loginPage("/member/login")
+                        .defaultSuccessUrl("/", true)
+                        .failureUrl("/member/login/error"))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/member/**")).permitAll()
-                        .requestMatchers(AntPathRequestMatcher.antMatcher("/board/**")).permitAll()
-                        .requestMatchers(AntPathRequestMatcher.antMatcher("/item/**")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/board/list")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/cart/**")).hasRole("USER")
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/order/**")).hasRole("USER")
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/admin/**")).hasRole("ADMIN")
@@ -75,6 +94,13 @@ public class SecurityConfig {
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/remove/**"))
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/images/**"))
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/img/**"));
+    }
+
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository() {
+        JdbcTokenRepositoryImpl repo = new JdbcTokenRepositoryImpl();
+        repo.setDataSource(dataSource);
+        return repo;
     }
 
 }

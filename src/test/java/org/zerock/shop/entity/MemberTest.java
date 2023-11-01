@@ -42,8 +42,10 @@ public class MemberTest {
         // 값이 잘 들어갔는지 확인하기 위해 깨끗하게 클리어
         em.clear();
 
-        Member member = memberRepository.findById(newMember.getId())
-                .orElseThrow(EntityNotFoundException::new);
+        Member member = memberRepository.findByEmail(newMember.getEmail());
+        /*Member member = memberRepository.findById(newMember.getId())
+                .orElseThrow(EntityNotFoundException::new);*/
+
         // id를 가져오지 못하면(값이 없으면) 예외처리 하겠다.
         System.out.println("register time : " + member.getRegTime());
         System.out.println("update time : " + member.getUpdateTime());

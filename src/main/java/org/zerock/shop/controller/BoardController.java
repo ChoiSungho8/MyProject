@@ -124,6 +124,7 @@ public class BoardController {
     }
 
     // 삭제 처리
+    @PreAuthorize("principal.username == #boardDto.writer")
     @PostMapping("/remove")
     public String remove(BoardDto boardDto, RedirectAttributes redirectAttributes) {
 
