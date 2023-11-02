@@ -2,9 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layout1}">
-
-<meta name="_csrf" th:content="${_csrf.token}"/>
-<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+<head>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 
 <!-- 사용자 스크립트 추가 -->
 <th:block layout:fragment="script">
@@ -66,7 +66,7 @@
           // 현재 로그인 상태가 아니라면 "로그인 후 이용해주세요." 라는 메시지를 보여주고 로그인 페이지로 이동
           if (jqXHR.status == '401') {
             alert('로그인 후 이용해주세요');
-            location.href='/members/login';
+            location.href='/member/login';
           } else { // 주문 시 에러가 발생하면 해당 메시지를 보여줍니다.
             alert(jqXHR.responseText);
           }
@@ -107,7 +107,7 @@
 
           if (jqXHR.status == '401') {
             alert('로그인 후 이용해주세요');
-            location.href='/members/login';
+            location.href='/member/login';
           } else {
             alert(jqXHR.responseText);
           }
@@ -148,7 +148,7 @@
     }
   </style>
 </th:block>
-
+</head>
 <div layout:fragment="content" style="margin-left:25%; margin-right:25%">
 
   <input type="hidden" id="itemId" th:value="${item.id}"/>

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import org.zerock.shop.config.security.dto.MemberSecurityDto;
 import org.zerock.shop.constant.Role;
 import org.zerock.shop.entity.Member;
-import org.zerock.shop.repository.MemberRepository;
+import org.zerock.shop.repository.MemberRepository1;
 
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
-    private final MemberRepository memberRepository;
+    private final MemberRepository1 memberRepository1;
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -65,7 +65,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     private MemberSecurityDto generateDto(String email, Map<String, Object> params) {
 
-        Optional<Member> result = memberRepository.findByEmail2(email);
+        Optional<Member> result = memberRepository1.findByEmail(email);
 
         // 데이터베이스에 해당 이메일 사용자가 없다면
         if (result.isEmpty()) {
@@ -79,7 +79,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
                     .build();
 
             member.addRole(Role.USER);
-            memberRepository.save(member);
+            memberRepository1.save(member);
 
             // MemberSecurityDto 구성 및 반환
             MemberSecurityDto memberSecurityDto = new MemberSecurityDto(email, "11111111",
@@ -93,7 +93,8 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
             Member member = result.get();
 
-            MemberSecurityDto memberSecurityDto = new MemberSecurityDto(member.getMid(),
+            MemberSecurityDto memberSecurityDto = new MemberSecurityDto(
+                    member.getMid(),
                     member.getPassword(),
                     member.getEmail(),
                     member.isDel(),

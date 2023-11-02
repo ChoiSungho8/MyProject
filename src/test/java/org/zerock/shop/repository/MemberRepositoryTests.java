@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.annotation.Commit;
 import org.zerock.shop.constant.Role;
 import org.zerock.shop.entity.Member;
 
@@ -16,7 +17,7 @@ import java.util.stream.IntStream;
 public class MemberRepositoryTests {
 
     @Autowired
-    private MemberRepository memberRepository;
+    private MemberRepository1 memberRepository1;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -39,7 +40,7 @@ public class MemberRepositoryTests {
                 member.addRole(Role.ADMIN);
             }
 
-            memberRepository.save(member);
+            memberRepository1.save(member);
 
         });
 
@@ -49,7 +50,7 @@ public class MemberRepositoryTests {
     @Test
     public void testRead() {
 
-        Optional<Member> result = memberRepository.getWithRoles("member100");
+        Optional<Member> result = memberRepository1.getWithRoles("member100");
 
         Member member = result.orElseThrow();
 
@@ -57,6 +58,17 @@ public class MemberRepositoryTests {
         log.info(member.getRoleSet());
 
         member.getRoleSet().forEach(role -> log.info(role.name()));
+
+    }
+
+    @Commit
+    @Test
+    public void testUpdate() {
+
+        String mid = "csh2572@naver.com"; // 소셜로그인으로 추가된 사용자로 현재 DB에 존재하는 이메일
+        String password = passwordEncoder.encode("87654321");
+
+        memberRepository1.updatePassword(password, mid);
 
     }
 

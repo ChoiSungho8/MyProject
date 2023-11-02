@@ -11,10 +11,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.zerock.shop.config.security.handler.Custom403Handler;
+import org.zerock.shop.config.security.handler.CustomSocialLoginSuccessHandler;
 
 import javax.sql.DataSource;
 
@@ -24,6 +26,14 @@ import javax.sql.DataSource;
 @EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
+    // 자동 로그인 구현 DB 생성해야함
+    /*create table persistent_logins (
+        username varchar(64) not null,
+        series varchar(64) primary key,
+        token varchar(64) not null,
+        last_used timestamp not null
+    );*/
+    
     private final DataSource dataSource;
 
     // BCryptPasswordEncoder의 해시 함수를 이용하여 비밀번호를 암호화하여 저장
@@ -54,12 +64,12 @@ public class SecurityConfig {
                 // 소셜 로그인 설정
                 .oauth2Login(oauth -> oauth
                         .loginPage("/member/login")
-                        .defaultSuccessUrl("/", true)
-                        .failureUrl("/member/login/error"))
+                        .successHandler(authenticationSuccessHandler()))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/member/**")).permitAll()
-                        .requestMatchers(AntPathRequestMatcher.antMatcher("/board/list")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/board/**")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/item/**")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/cart/**")).hasRole("USER")
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/order/**")).hasRole("USER")
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/admin/**")).hasRole("ADMIN")
@@ -79,6 +89,12 @@ public class SecurityConfig {
         return new Custom403Handler();
     }
 
+    // OAuth2 로그인 관련 CustomSocialLoginSuccessHandler를 로그인 성공 처리 시 이용
+    @Bean
+    public AuthenticationSuccessHandler authenticationSuccessHandler() {
+        return new CustomSocialLoginSuccessHandler(passwordEncoder());
+    }
+    
     // static 디렉터리의 하위 파일은 인증을 무시하도록 설정
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
