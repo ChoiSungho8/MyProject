@@ -10,7 +10,7 @@
 <div layout:fragment="content">
   <div class="row mt-3">
     <div class="col">
-      <div class="card">
+      <div class="w-50 p-3">
         <div class="card-header">
           Board Modify
         </div>
@@ -66,28 +66,30 @@
             </div>
           </form>
         </div><!-- end card body -->
-      </div><!-- end card -->
+
+        <!-- 첨부파일 섬네일을 보여줄 부분 -->
+        <div class="row mt-3">
+          <div class="col">
+            <div class="container-fluid d-flex uploadResult" style="flex-wrap : wrap;">
+              <th:block th:each="fileName:${dto.fileNames}">
+                <div class="card col-4" th:with = "arr = ${fileName.split('_')}">
+                  <div class="card-header d-flex justify-content-center">
+                    [[${arr[1]}]]
+                    <button class="btn-sm btn-danger" th:onclick="removeFile([[${arr[0]}]], [[${arr[1]}]], this)">X</button>
+                  </div>
+                  <div class="card-body">
+                    <img th:src="|/view/s_${fileName}|" th:data-src="${fileName}" />
+                  </div>
+                </div><!-- card -->
+              </th:block>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end w-50 p-3 -->
     </div><!-- end col -->
   </div><!-- end row -->
 
-  <!-- 첨부파일 섬네일을 보여줄 부분 -->
-  <div class="row mt-3">
-    <div class="col">
-      <div class="container-fluid d-flex uploadResult" style="flex-wrap : wrap;">
-        <th:block th:each="fileName:${dto.fileNames}">
-          <div class="card col-4" th:with = "arr = ${fileName.split('_')}">
-            <div class="card-header d-flex justify-content-center">
-              [[${arr[1]}]]
-              <button class="btn-sm btn-danger" th:onclick="removeFile([[${arr[0]}]], [[${arr[1]}]], this)">X</button>
-            </div>
-            <div class="card-body">
-              <img th:src="|/view/s_${fileName}|" th:data-src="${fileName}" />
-            </div>
-          </div><!-- card -->
-        </th:block>
-      </div>
-    </div>
-  </div>
 
   <!-- 첨부파일 추가를 위한 모달창 -->
   <div class="modal uploadModal" tabindex="-1">

@@ -3,22 +3,34 @@ package org.zerock.shop.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.zerock.shop.config.security.APIUserDetailsService;
+import org.zerock.shop.config.security.filter.APILoginFilter;
+import org.zerock.shop.config.security.handler.APILoginSuccessHandler;
 import org.zerock.shop.config.security.handler.Custom403Handler;
 import org.zerock.shop.config.security.handler.CustomSocialLoginSuccessHandler;
 
 import javax.sql.DataSource;
+import java.util.Arrays;
 
 @Configuration
 @RequiredArgsConstructor
@@ -36,6 +48,9 @@ public class SecurityConfig {
     
     private final DataSource dataSource;
 
+    // 주입
+    private final APIUserDetailsService apiUserDetailsService;
+
     // BCryptPasswordEncoder의 해시 함수를 이용하여 비밀번호를 암호화하여 저장
     @Bean
     PasswordEncoder passwordEncoder() {
@@ -48,7 +63,44 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        http.formLogin(formLogin -> formLogin
+        // AuthenticationManager설정
+        AuthenticationManagerBuilder authenticationManagerBuilder =
+                http.getSharedObject(AuthenticationManagerBuilder.class);
+
+        authenticationManagerBuilder
+                .userDetailsService(apiUserDetailsService)
+                .passwordEncoder(passwordEncoder());
+
+        // Get AuthenticationManager
+        AuthenticationManager authenticationManager =
+                authenticationManagerBuilder.build();
+
+        // 반드시 필요
+        http.authenticationManager(authenticationManager);
+
+        // APILoginFilter
+        APILoginFilter apiLoginFilter = new APILoginFilter("/generateToken");
+        apiLoginFilter.setAuthenticationManager(authenticationManager);
+
+        // APILoginSuccessHandler
+        APILoginSuccessHandler successHandler = new APILoginSuccessHandler();
+        // SuccessHandler 세팅
+        apiLoginFilter.setAuthenticationSuccessHandler(successHandler);
+
+        // APILoginFilter의 위치 조정
+        http.addFilterBefore(apiLoginFilter, UsernamePasswordAuthenticationFilter.class);
+
+        http.csrf(AbstractHttpConfigurer::disable);
+
+        http.sessionManagement(sessionManagement ->
+                sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+
+        // 이게 있어야 jsonData 값 넘어옴
+        http.cors(httpSecurityCorsConfigurer -> {
+            httpSecurityCorsConfigurer.configurationSource(corsConfigurationSource());
+        });
+
+        /*http.formLogin(formLogin -> formLogin
                 .loginPage("/member/login")
                 .defaultSuccessUrl("/", true)
                 .usernameParameter("email")
@@ -70,6 +122,7 @@ public class SecurityConfig {
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/member/**")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/board/**")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/item/**")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/api/**")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/cart/**")).hasRole("USER")
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/order/**")).hasRole("USER")
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/admin/**")).hasRole("ADMIN")
@@ -78,10 +131,27 @@ public class SecurityConfig {
                 // 로그인이 되었어도 권한이 없으면
                 .exceptionHandling(exceptionHandling -> exceptionHandling
                         .accessDeniedHandler(accessDeniedHandler())
-                .authenticationEntryPoint(new CustomAuthenticationEntryPoint()));
+                .authenticationEntryPoint(new CustomAuthenticationEntryPoint()));*/
 
         return http.build();
 
+    }
+
+    // 이거 없으면 악명 높은 CORS 에러 메세지 뜸
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+
+        CorsConfiguration configuration = new CorsConfiguration();
+
+        configuration.setAllowedOriginPatterns(Arrays.asList("*"));
+        configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE"));
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
+        configuration.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+
+        return source;
     }
 
     @Bean

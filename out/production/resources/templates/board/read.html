@@ -10,7 +10,7 @@
 <div layout:fragment="content">
   <div class="row mt-3">
     <div class="col">
-      <div class="card">
+      <div class="w-50 p-3">
         <div class="card-header">
           Board Read
         </div>
@@ -64,12 +64,11 @@
 
           <div class="card" th:if="${dto.fileNames != null && dto.fileNames.size() > 0}">
 
-            <img class="card-img-top" th:each="fileName : ${dto.fileNames}" th:src="|/view/${fileName}|"/>
+            <img class="card-img-top" th:each="fileName : ${dto.fileNames}" th:src="|/view/${fileName}|" />
+
+            <br>
 
           </div>
-
-      </div><!-- end card -->
-    </div><!-- end col -->
 
     <div class="row mt-3">
      <div class="col-md-12">
@@ -86,6 +85,10 @@
       </ul>
     </div>
   </div>
+
+      </div><!-- end w-50 p-3 -->
+    </div><!-- end col -->
+
   </div><!-- end row -->
   <!-- 댓글 등록을 위한 모달창 -->
   <div class="modal registerModal" tabindex="-1">
