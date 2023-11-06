@@ -15,7 +15,9 @@
 
     const data = {mid : "apiuser10", password : "11111111"}
 
-    axios.post("http://localhost/generateToken", data)
+    axios.post("http://localhost/generateToken", data).then(res => {
+        console.log(res.data.accessToken)
+    })
 
   }, false)
 
