@@ -25,6 +25,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.zerock.shop.config.security.APIUserDetailsService;
 import org.zerock.shop.config.security.filter.APILoginFilter;
+import org.zerock.shop.config.security.filter.RefreshTokenFilter;
 import org.zerock.shop.config.security.filter.TokenCheckFilter;
 import org.zerock.shop.config.security.handler.APILoginSuccessHandler;
 import org.zerock.shop.config.security.handler.Custom403Handler;
@@ -98,11 +99,6 @@ public class SecurityConfig {
         // APILoginFilter의 위치 조정
         http.addFilterBefore(apiLoginFilter, UsernamePasswordAuthenticationFilter.class);
 
-        http.csrf(AbstractHttpConfigurer::disable);
-
-        http.sessionManagement(sessionManagement ->
-                sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-
         // 이게 있어야 jsonData 값 넘어옴
         http.cors(httpSecurityCorsConfigurer -> {
             httpSecurityCorsConfigurer.configurationSource(corsConfigurationSource());
@@ -113,6 +109,16 @@ public class SecurityConfig {
                 tokenCheckFilter(jwtUtil),
                 UsernamePasswordAuthenticationFilter.class
         );
+
+        // refreshToken 호출 처리
+        http.addFilterBefore(new RefreshTokenFilter("/refreshToken", jwtUtil),
+                TokenCheckFilter.class);
+
+        http.csrf(AbstractHttpConfigurer::disable);
+
+        http.sessionManagement(sessionManagement ->
+                sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+
 
 
         /*http.formLogin(formLogin -> formLogin
