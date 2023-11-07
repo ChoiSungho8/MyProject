@@ -15,6 +15,7 @@
 
     const data = {mid : "apiuser10", password : "11111111"}
 
+      // 1단계 : 토큰 생성과 저장
     axios.post("http://localhost/generateToken", data).then(res => {
         const accessToken = res.data.accessToken
         const refreshToken = res.data.refreshToken

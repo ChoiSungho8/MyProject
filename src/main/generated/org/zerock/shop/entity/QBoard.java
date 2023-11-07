@@ -24,10 +24,14 @@ public class QBoard extends EntityPathBase<Board> {
 
     public final NumberPath<Long> bno = createNumber("bno", Long.class);
 
+    public final BooleanPath complete = createBoolean("complete");
+
     public final StringPath content = createString("content");
 
     //inherited
     public final StringPath createdBy = _super.createdBy;
+
+    public final DatePath<java.time.LocalDate> dueDate = createDate("dueDate", java.time.LocalDate.class);
 
     public final SetPath<BoardImage, QBoardImage> imageSet = this.<BoardImage, QBoardImage>createSet("imageSet", BoardImage.class, QBoardImage.class, PathInits.DIRECT2);
 

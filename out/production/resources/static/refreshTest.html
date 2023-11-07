@@ -43,9 +43,9 @@
               const newRefreshToken = res.data.refreshToken
 
               document.querySelector(".accessResult").innerHTML =
-                      oldAccessToken !== newAccessToken?newAccessToken:'OLD'
+                      oldAccessToken !== newAccessToken ? newAccessToken : 'OLD'
               document.querySelector(".refreshResult").innerHTML =
-                      oldRefreshToken !== newRefreshToken?newRefreshToken:'OLD'
+                      oldRefreshToken !== newRefreshToken ? newRefreshToken : 'OLD'
 
     })
             .catch(error => {

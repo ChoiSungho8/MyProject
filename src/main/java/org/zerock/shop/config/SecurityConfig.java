@@ -114,7 +114,7 @@ public class SecurityConfig {
         http.addFilterBefore(new RefreshTokenFilter("/refreshToken", jwtUtil),
                 TokenCheckFilter.class);
 
-        http.csrf(AbstractHttpConfigurer::disable);
+        http.csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable());
 
         http.sessionManagement(sessionManagement ->
                 sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.BatchSize;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,6 +14,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Table(name = "board")
 public class Board extends BaseEntity {
 
     @Id
@@ -27,6 +29,22 @@ public class Board extends BaseEntity {
 
     @Column(length = 50, nullable = false)
     private String writer;
+
+    private LocalDate dueDate;
+
+    private boolean complete;
+
+    public void changeComplete(boolean complete) {
+        this.complete = complete;
+    }
+
+    public void changeDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public void changeTitle(String title) {
+        this.title = title;
+    }
 
     public void change(String title, String content) {
         this.title = title;
