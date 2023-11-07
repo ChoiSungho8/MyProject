@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.time.LocalDate;
 
 @Data
 @Builder
@@ -27,6 +28,12 @@ public class PageRequestDto {
     private String type; // 검색의 종류 t, c, w, tc, tw, twc
 
     private String keyword;
+
+    // 기간별 검색 조건을 고려
+    private LocalDate from;
+    private LocalDate to;
+    // 완료 여부 고려
+    private Boolean completed;
 
     // BoardRepository에서 String[]로 처리하기 때문에 type이라는 문자열을 배열로 반환해 주는 기능이 필요
     public String[] getTypes() {

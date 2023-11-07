@@ -8,9 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
-import org.zerock.shop.dto.BoardImageDto;
-import org.zerock.shop.dto.BoardListAllDto;
-import org.zerock.shop.dto.BoardListReplyCountDto;
+import org.zerock.shop.dto.*;
 import org.zerock.shop.entity.Board;
 import org.zerock.shop.entity.QBoard;
 import org.zerock.shop.entity.QReply;
@@ -22,6 +20,49 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
 
     public BoardSearchImpl() {
         super(Board.class);
+    }
+
+    // QBoard ㅣ용 from, to를 이용하는 검색 조건이나 complete에 해당하는 검색 조건 구현
+    @Override
+    public Page<BoardDto> list(PageRequestDto pageRequestDto) {
+
+        QBoard board = QBoard.board;
+
+        JPQLQuery<Board> query = from(board);
+
+        if(pageRequestDto.getFrom() != null && pageRequestDto.getTo() != null) {
+
+            BooleanBuilder fromToBuilder = new BooleanBuilder();
+
+            fromToBuilder.and(board.dueDate.goe(pageRequestDto.getFrom()));
+            fromToBuilder.and(board.dueDate.loe(pageRequestDto.getTo()));
+            query.where(fromToBuilder);
+
+        }
+
+        if(pageRequestDto.getCompleted() != null) {
+            query.where(board.complete.eq(pageRequestDto.getCompleted()));
+        }
+
+        if(pageRequestDto.getKeyword() != null) {
+            query.where(board.title.contains(pageRequestDto.getKeyword()));
+        }
+
+        this.getQuerydsl().applyPagination(pageRequestDto.getPageable("bno"), query);
+
+        JPQLQuery<BoardDto> dtoQuery = query.select(Projections.bean(BoardDto.class,
+                board.bno,
+                board.title,
+                board.complete,
+                board.writer
+        ));
+
+        List<BoardDto> list = dtoQuery.fetch();
+
+        long count = dtoQuery.fetchCount();
+
+        return new PageImpl<>(list, pageRequestDto.getPageable("bno"), count);
+
     }
 
     // Q도메인을 이용한 쿼리 작성 및 테스트

@@ -10,11 +10,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
+import org.zerock.shop.dto.BoardDto;
 import org.zerock.shop.dto.BoardListAllDto;
 import org.zerock.shop.dto.BoardListReplyCountDto;
+import org.zerock.shop.dto.PageRequestDto;
 import org.zerock.shop.entity.Board;
 import org.zerock.shop.entity.BoardImage;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -30,7 +33,7 @@ public class BoardRepositoryTests {
     @Autowired
     private ReplyRepository replyRepository;
 
-    @Test
+    /*@Test
     public void testInsert() {
         IntStream.rangeClosed(1, 100).forEach(i -> {
             Board board = Board.builder()
@@ -42,7 +45,23 @@ public class BoardRepositoryTests {
             Board result = boardRepository.save(board);
             log.info("BNO : " + result.getBno());
         });
-    }
+    }*/
+
+    @Test
+    public void testInsert() {
+        IntStream.rangeClosed(1, 100).forEach(i -> {
+            Board board = Board.builder()
+                    .title("Board..." + i)
+                    .content("Board...content..." + i)
+                    .writer("user" + (i % 10))
+                    //.dueDate(LocalDate.of(2023, (i%12)+1, (i%30)+1))
+                    .complete(false)
+                    .build();
+
+            boardRepository.save(board);
+
+        });
+    } // end method
 
     @Test
     public void testSelect() {
@@ -91,6 +110,21 @@ public class BoardRepositoryTests {
         List<Board> boardList = result.getContent();
 
         boardList.forEach(board -> log.info(board));
+
+    }
+
+    // 검색 조건에 대한 테스트
+    @Test
+    public void testSearch() {
+
+        PageRequestDto pageRequestDto = PageRequestDto.builder()
+                .from(LocalDate.of(2023,11,01))
+                .to(LocalDate.of(2023,11,07))
+                .build();
+
+        Page<BoardDto> result = boardRepository.list(pageRequestDto);
+
+        result.forEach(boardDto -> log.info(boardDto));
 
     }
 

@@ -6,13 +6,12 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
+import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.shop.dto.*;
 import org.zerock.shop.service.BoardService;
@@ -20,9 +19,10 @@ import org.zerock.shop.service.BoardService;
 import java.io.File;
 import java.nio.file.Files;
 import java.util.List;
+import java.util.Map;
 
-@Controller
-@RequestMapping("/board")
+@RestController
+@RequestMapping("/api/board")
 @Log4j2
 @RequiredArgsConstructor
 public class BoardController {
@@ -33,6 +33,17 @@ public class BoardController {
     private String uploadPath;
 
     private final BoardService boardService;
+
+    /*@PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Map<String, Long> register(@RequestBody BoardDto boardDto) {
+
+        log.info(boardDto);
+
+        Long bno = boardService.register(boardDto);
+
+        return Map.of("bno", bno);
+
+    }*/
 
     @GetMapping("/list")
     public void list(PageRequestDto pageRequestDto, Model model) {

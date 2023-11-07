@@ -1,12 +1,16 @@
 package org.zerock.shop.repository;
 
+import com.querydsl.jpa.JPQLQuery;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.zerock.shop.dto.BoardDto;
+import org.zerock.shop.dto.PageRequestDto;
 import org.zerock.shop.entity.Board;
+import org.zerock.shop.entity.QBoard;
 import org.zerock.shop.repository.search.BoardSearch;
 
 import java.util.Optional;

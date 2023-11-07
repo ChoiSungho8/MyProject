@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,6 +23,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.zerock.shop.config.security.APIUserDetailsService;
+import org.zerock.shop.config.security.CustomUserDetailsService;
 import org.zerock.shop.config.security.filter.APILoginFilter;
 import org.zerock.shop.config.security.filter.RefreshTokenFilter;
 import org.zerock.shop.config.security.filter.TokenCheckFilter;
@@ -50,6 +50,8 @@ public class SecurityConfig {
     );*/
     
     private final DataSource dataSource;
+
+    private final CustomUserDetailsService userDetailsService;
 
     // 주입
     private final APIUserDetailsService apiUserDetailsService;
@@ -119,8 +121,6 @@ public class SecurityConfig {
         http.sessionManagement(sessionManagement ->
                 sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
-
-
         /*http.formLogin(formLogin -> formLogin
                 .loginPage("/member/login")
                 .defaultSuccessUrl("/", true)
@@ -133,6 +133,7 @@ public class SecurityConfig {
                 .rememberMe(rememberMe -> rememberMe
                         .key("12345678")
                         .tokenRepository(persistentTokenRepository())
+                        .userDetailsService(userDetailsService)
                         .tokenValiditySeconds(60*60*24*30))
                 // 소셜 로그인 설정
                 .oauth2Login(oauth -> oauth
@@ -152,8 +153,8 @@ public class SecurityConfig {
                 // 로그인이 되었어도 권한이 없으면
                 .exceptionHandling(exceptionHandling -> exceptionHandling
                         .accessDeniedHandler(accessDeniedHandler())
-                .authenticationEntryPoint(new CustomAuthenticationEntryPoint()));*/
-
+                .authenticationEntryPoint(new CustomAuthenticationEntryPoint()));
+*/
         return http.build();
 
     }

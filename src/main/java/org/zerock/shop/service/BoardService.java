@@ -1,11 +1,13 @@
 package org.zerock.shop.service;
 
+import org.springframework.transaction.annotation.Transactional;
 import org.zerock.shop.dto.*;
 import org.zerock.shop.entity.Board;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Transactional
 public interface BoardService {
 
     // 등록 작업 처리
