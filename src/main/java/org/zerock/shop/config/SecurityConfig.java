@@ -58,8 +58,8 @@ public class SecurityConfig {
 
     private final JWTUtil jwtUtil;
 
-    private TokenCheckFilter tokenCheckFilter(JWTUtil jwtUtil) {
-        return new TokenCheckFilter(jwtUtil);
+    private TokenCheckFilter tokenCheckFilter(JWTUtil jwtUtil, APIUserDetailsService apiUserDetailsService) {
+        return new TokenCheckFilter(apiUserDetailsService, jwtUtil);
     }
 
     // BCryptPasswordEncoder의 해시 함수를 이용하여 비밀번호를 암호화하여 저장
@@ -101,16 +101,16 @@ public class SecurityConfig {
         // APILoginFilter의 위치 조정
         http.addFilterBefore(apiLoginFilter, UsernamePasswordAuthenticationFilter.class);
 
+        // api로 시작하는 모든 경로는 TokenCheckFilter 동작
+        http.addFilterBefore(
+                tokenCheckFilter(jwtUtil, apiUserDetailsService),
+                UsernamePasswordAuthenticationFilter.class
+        );
+
         // 이게 있어야 jsonData 값 넘어옴
         http.cors(httpSecurityCorsConfigurer -> {
             httpSecurityCorsConfigurer.configurationSource(corsConfigurationSource());
         });
-
-        // api로 시작하는 모든 경로는 TokenCheckFilter 동작
-        http.addFilterBefore(
-                tokenCheckFilter(jwtUtil),
-                UsernamePasswordAuthenticationFilter.class
-        );
 
         // refreshToken 호출 처리
         http.addFilterBefore(new RefreshTokenFilter("/refreshToken", jwtUtil),
@@ -121,7 +121,7 @@ public class SecurityConfig {
         http.sessionManagement(sessionManagement ->
                 sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
-        /*http.formLogin(formLogin -> formLogin
+        http.formLogin(formLogin -> formLogin
                 .loginPage("/member/login")
                 .defaultSuccessUrl("/", true)
                 .usernameParameter("email")
@@ -154,7 +154,7 @@ public class SecurityConfig {
                 .exceptionHandling(exceptionHandling -> exceptionHandling
                         .accessDeniedHandler(accessDeniedHandler())
                 .authenticationEntryPoint(new CustomAuthenticationEntryPoint()));
-*/
+
         return http.build();
 
     }

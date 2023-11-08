@@ -21,8 +21,8 @@ import java.nio.file.Files;
 import java.util.List;
 import java.util.Map;
 
-@RestController
-@RequestMapping("/api/board")
+@Controller
+@RequestMapping("/board")
 @Log4j2
 @RequiredArgsConstructor
 public class BoardController {

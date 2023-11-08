@@ -118,8 +118,8 @@ public class BoardRepositoryTests {
     public void testSearch() {
 
         PageRequestDto pageRequestDto = PageRequestDto.builder()
-                .from(LocalDate.of(2023,11,01))
-                .to(LocalDate.of(2023,11,07))
+                .from(LocalDate.of(2023,10,01))
+                .to(LocalDate.of(2023,12,31))
                 .build();
 
         Page<BoardDto> result = boardRepository.list(pageRequestDto);
