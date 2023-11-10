@@ -7,8 +7,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.zerock.shop.dto.MemberFormDto;
 import org.zerock.shop.entity.Member;
 import org.zerock.shop.repository.MemberRepository;
+import org.zerock.shop.repository.MemberRepository1;
+
+import java.util.Optional;
 
 @Service
 // 비즈니스 로직을 담당하는 서비스 계층 클래스에 선언
@@ -23,6 +27,19 @@ import org.zerock.shop.repository.MemberRepository;
 public class MemberService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
+    private final MemberRepository1 memberRepository1;
+
+    public MemberFormDto memberInfo(String email) {
+
+        Optional<Member> result = memberRepository1.findByEmail(email);
+
+        Member member = result.orElseThrow();
+
+        MemberFormDto memberFormDto = entityToDto(member);
+
+        return memberFormDto;
+
+    }
 
     public Member saveMember(Member member) {
         validateDuplicateMember(member);
@@ -56,4 +73,18 @@ public class MemberService implements UserDetailsService {
                 .build();
     }
 
+
+    public MemberFormDto entityToDto(Member member) {
+
+        MemberFormDto memberFormDto = MemberFormDto.builder()
+                .name(member.getName())
+                .email(member.getEmail())
+                .mid(member.getMid())
+                .password(member.getPassword())
+                .address(member.getAddress())
+                .build();
+
+        return memberFormDto;
+
+    }
 }

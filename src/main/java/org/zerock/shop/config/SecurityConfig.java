@@ -139,7 +139,7 @@ public class SecurityConfig {
                 .oauth2Login(oauth -> oauth
                         .loginPage("/member/login")
                         .successHandler(authenticationSuccessHandler()))
-                .authorizeHttpRequests(authorize -> authorize
+                /*.authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/member/**")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/board/**")).permitAll()
@@ -148,7 +148,7 @@ public class SecurityConfig {
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/cart/**")).hasRole("USER")
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/order/**")).hasRole("USER")
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/admin/**")).hasRole("ADMIN")
-                        .anyRequest().authenticated())
+                        .anyRequest().authenticated())*/
                 // 인증 되지 않은 사용자가 리소스에 접근하였을 대 수행되는 핸들러를 등록합니다.
                 // 로그인이 되었어도 권한이 없으면
                 .exceptionHandling(exceptionHandling -> exceptionHandling
