@@ -19,6 +19,7 @@ import org.zerock.shop.repository.OrderRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 // 주문 로직을 작성하기 위한 클래스
 @Service
@@ -35,7 +36,8 @@ public class OrderService {
         // 주문할 상품을 조회합니다.
         Item item = itemRepository.findById(orderDto.getItemId()).orElseThrow(EntityNotFoundException::new);
         // 현재 로그인한 회원의 이메일 정보를 이용해서 회원 정보를 조회합니다.
-        Member member = memberRepository.findByEmail(email);
+        Optional<Member> result = memberRepository.findByEmail(email);
+        Member member = result.orElseThrow();
 
         List<OrderItem> orderItemList = new ArrayList<>();
         //  주문할 상품 엔티티와 주문 수량을 이용하여 주문 상품 엔티티를 생성합니다.
@@ -87,7 +89,9 @@ public class OrderService {
     public boolean validateOrder(Long orderId, String email) {
         // 현재 로그인한 사용자와 주문 데이터를 생성한 사용자가 같은지 검사를 합니다.
         // 같을 때는 true를 반환하고 같지 않을 경우는 false를 반환합니다.
-        Member curMember = memberRepository.findByEmail(email);
+        Optional<Member> result = memberRepository.findByEmail(email);
+        Member curMember = result.orElseThrow();
+
         Order order = orderRepository.findById(orderId).orElseThrow(EntityNotFoundException::new);
         Member savedMember = order.getMember();
 
@@ -109,7 +113,9 @@ public class OrderService {
     public Long orders(List<OrderDto> orderDtoList, String email) {
 
         // 로그인한 회원 이메일을 이용하여 회원 정보를 member 객체에 저장
-        Member member = memberRepository.findByEmail(email);
+        Optional<Member> result = memberRepository.findByEmail(email);
+        Member member = result.orElseThrow();
+
         // 주문 상품 목록 객체 생성
         List<OrderItem> orderItemList = new ArrayList<>();
 

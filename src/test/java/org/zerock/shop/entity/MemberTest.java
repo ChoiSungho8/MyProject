@@ -12,6 +12,8 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.shop.repository.MemberRepository;
 
+import java.util.Optional;
+
 @SpringBootTest // 통합 테스트 제공
 @Transactional // 테스트 하고 나서 커밋을 안 할 시 자동 롤백
 // 테스트를 할 때 application-test.properties를 쓰기 위함
@@ -42,7 +44,8 @@ public class MemberTest {
         // 값이 잘 들어갔는지 확인하기 위해 깨끗하게 클리어
         em.clear();
 
-        Member member = memberRepository.findByEmail(newMember.getEmail());
+        Optional<Member> result = memberRepository.findByEmail(newMember.getEmail());
+        Member member = result.orElseThrow();
         /*Member member = memberRepository.findById(newMember.getId())
                 .orElseThrow(EntityNotFoundException::new);*/
 

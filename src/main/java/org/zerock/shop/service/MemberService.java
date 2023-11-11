@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.zerock.shop.entity.Member;
 import org.zerock.shop.repository.MemberRepository;
 
+import java.util.Optional;
+
 @Service
 // 비즈니스 로직을 담당하는 서비스 계층 클래스에 선언
 // 로직 처리 에러 발생 시 변경된 데이터를 로직 수행 이전 상태로 콜백
@@ -30,7 +32,9 @@ public class MemberService implements UserDetailsService {
     }
 
     private void validateDuplicateMember(Member member) {
-        Member findMember = memberRepository.findByEmail(member.getEmail());
+        Optional<Member> result = memberRepository.findByEmail(member.getEmail());
+        Member findMember = result.orElseThrow();
+
         if (findMember != null) {
             // 이미 가입된 회원의 경우 IllegalStateException 예외 발생
             throw new IllegalStateException("이미 가입된 회원입니다.");
@@ -41,7 +45,8 @@ public class MemberService implements UserDetailsService {
     // UserDetailService 인터페이스의 loadUserByUsername() 메소드를 오버라이딩
     // 로그인 할 유저의 email을 파라미터로 전달 받음
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Member member = memberRepository.findByEmail(email);
+        Optional<Member> result = memberRepository.findByEmail(email);
+        Member member = result.orElseThrow();
 
         if (member == null) {
             throw new UsernameNotFoundException(email);

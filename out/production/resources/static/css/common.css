@@ -127,8 +127,8 @@ hr {display:none;}
 /* header */
 header {position:absolute; left:0; top:0; width:100%; height:113px; background:rgba(0,0,0,0.5); z-index:100;}
 header .header_area {/*position:relative;*/}
-header .header_area h1 {float:left; padding:45px 0 0;}
-header .header_area h1 a {display:block; width:270px; height:71px; text-indent:-9999px; overflow:hidden; background:url(../img/logo.png) no-repeat;}
+header .header_area h1 {float:left; padding:25px 0 0;}
+header .header_area h1 a {display:block; width:160px; height:71px; text-indent:-9999px; overflow:hidden; background:url(../img/bread8.png) no-repeat;}
 header .header_area .openMOgnb {display:none;}
 .header_cont {float:right; width:780px;}
 .header_cont .util {text-align: right; padding-top:10px;}
@@ -176,7 +176,7 @@ footer .foot_area .snslink li + li + li a {background-image:url(../img/ico_insta
 .main_rolling_mobile {display: none;}
 .visualRoll {position:relative; width:100%;}
 .viewImgList {position:relative; width:100%;}	
-.viewImgList li {text-align:center; height:550px; line-height:550px;}
+.viewImgList li {text-align:center; height:450px; line-height:550px;}
 .viewImgList li.imglist0 {position:relative; z-index:50; background:url('../img/foodbanner_one.jpg') no-repeat center;}
 .viewImgList li.imglist1 {position:absolute; width:100%; left:0; top:0; z-index:10; background:url('../img/foodbanner_two.png') no-repeat center;}
 .viewImgList li.imglist2 {position:absolute; width:100%; left:0; top:0; z-index:10; background:url('../img/foodbanner_three.jpg') no-repeat center;}
