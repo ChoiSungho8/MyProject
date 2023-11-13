@@ -1,4 +1,3 @@
-/*
 package org.zerock.shop.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -14,22 +13,15 @@ import java.util.List;
 @RequestMapping("/api/sample")
 public class SampleController {
 
-    @Operation(summary = "SampleTest", description = "Sample GET doA")
     @GetMapping("/doA")
     @PreAuthorize("hasRole('ROLE_USER')")
     public List<String> doA() {
-
-        return Arrays.asList("AAA", "BBB", "CCC");
-
+        return Arrays.asList("AAA","BBB","CCC");
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/doB")
     public List<String> doB() {
-
-        return Arrays.asList("AdminAAA", "AdminBBB", "AdminCCC");
-
+        return Arrays.asList("AdminAAA","AdminBBB","AdminCCC");
     }
-
 }
-*/

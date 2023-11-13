@@ -46,8 +46,9 @@ public class CustomUserDetailsService implements UserDetailsService {
         Member member = result.get();
 
         MemberSecurityDto memberSecurityDto = new MemberSecurityDto(
-                member.getEmail(),
+                member.getMid(),
                 member.getPassword(),
+                member.getEmail(),
                 member.isDel(),
                 false,
                 member.getRoleSet().stream().map(memberRole -> new SimpleGrantedAuthority("ROLE_" + memberRole.name())).collect(Collectors.toList())

@@ -25,7 +25,7 @@ import java.util.List;
 @RequestMapping("/board")
 @Log4j2
 @RequiredArgsConstructor
-public class BoardController {
+public class  BoardController {
     // 컨트롤러와 화면 처리
 
     // 실제 파일 삭제도 이루어지므로 첨부파일 경로를 주입 받는다.

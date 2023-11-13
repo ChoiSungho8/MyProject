@@ -20,7 +20,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class APIUserDetailsService implements UserDetailsService {
 
-    // 주입
+    //주입
     private final APIUserRepository apiUserRepository;
 
     @Override
@@ -30,9 +30,9 @@ public class APIUserDetailsService implements UserDetailsService {
 
         APIUser apiUser = result.orElseThrow(() -> new UsernameNotFoundException("Cannot find mid"));
 
-        log.info("APIUserDetailsService apiUser----------------------------------");
+        log.info("APIUserDetailsService apiUser-------------------------------------");
 
-        APIUserDto dto = new APIUserDto(
+        APIUserDto dto =  new APIUserDto(
                 apiUser.getMid(),
                 apiUser.getPassword(),
                 List.of(new SimpleGrantedAuthority("ROLE_USER")));
@@ -40,8 +40,6 @@ public class APIUserDetailsService implements UserDetailsService {
         log.info(dto);
 
         return dto;
-
     }
-
 }
 */

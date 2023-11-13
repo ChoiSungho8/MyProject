@@ -3,25 +3,21 @@ package org.zerock.shop.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.zerock.shop.config.security.handler.Custom403Handler;
 /*import org.zerock.shop.config.security.CustomUserDetailsService;
 import org.zerock.shop.config.security.APIUserDetailsService;
 import org.zerock.shop.config.security.filter.APILoginFilter;
@@ -29,8 +25,6 @@ import org.zerock.shop.config.security.filter.RefreshTokenFilter;
 import org.zerock.shop.config.security.filter.TokenCheckFilter;
 import org.zerock.shop.config.security.handler.APILoginSuccessHandler;
 import org.zerock.shop.util.JWTUtil;*/
-import org.zerock.shop.config.security.handler.Custom403Handler;
-import org.zerock.shop.config.security.handler.CustomSocialLoginSuccessHandler;
 
 import javax.sql.DataSource;
 import java.util.Arrays;
@@ -136,12 +130,12 @@ public class SecurityConfig {
                         .key("12345678")
                         .tokenRepository(persistentTokenRepository())
                         .userDetailsService(userDetailsService)
-                        .tokenValiditySeconds(60*60*24*30))*/
+                        .tokenValiditySeconds(60*60*24*30))
                 // 소셜 로그인 설정
                 .oauth2Login(oauth -> oauth
                         .loginPage("/member/login")
-                        .successHandler(authenticationSuccessHandler()))
-                /*.authorizeHttpRequests(authorize -> authorize
+                        .successHandler(authenticationSuccessHandler()))*/
+                .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/member/**")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/board/**")).permitAll()
@@ -150,7 +144,7 @@ public class SecurityConfig {
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/cart/**")).hasRole("USER")
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/order/**")).hasRole("USER")
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/admin/**")).hasRole("ADMIN")
-                        .anyRequest().authenticated())*/
+                        .anyRequest().authenticated())
                 // 인증 되지 않은 사용자가 리소스에 접근하였을 대 수행되는 핸들러를 등록합니다.
                 // 로그인이 되었어도 권한이 없으면
                 .exceptionHandling(exceptionHandling -> exceptionHandling
@@ -184,10 +178,10 @@ public class SecurityConfig {
     }
 
     // OAuth2 로그인 관련 CustomSocialLoginSuccessHandler를 로그인 성공 처리 시 이용
-    @Bean
+    /*@Bean
     public AuthenticationSuccessHandler authenticationSuccessHandler() {
         return new CustomSocialLoginSuccessHandler(passwordEncoder());
-    }
+    }*/
 
     // static 디렉터리의 하위 파일은 인증을 무시하도록 설정
     @Bean

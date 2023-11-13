@@ -17,11 +17,8 @@ public class APIUser {
     private String mid;
     private String password;
 
-    public void changePw(String password) {
-
+    public void changePw(String password){
         this.password = password;
-
     }
-
 }
 */

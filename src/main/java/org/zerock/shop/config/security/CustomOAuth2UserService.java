@@ -36,84 +36,74 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         log.info("userRequest....");
         log.info(userRequest);
 
-        log.info("oauth2 user...........................");
+        log.info("oauth2 user.....................................");
 
         ClientRegistration clientRegistration = userRequest.getClientRegistration();
         String clientName = clientRegistration.getClientName();
 
-        log.info("NAME : " + clientName);
-
+        log.info("NAME: "+clientName);
         OAuth2User oAuth2User = super.loadUser(userRequest);
         Map<String, Object> paramMap = oAuth2User.getAttributes();
 
         String email = null;
 
-        switch (clientName) {
-
+        switch (clientName){
             case "kakao":
                 email = getKakaoEmail(paramMap);
                 break;
-
         }
 
-        log.info("===========================");
+        log.info("===============================");
         log.info(email);
-        log.info("===========================");
+        log.info("===============================");
 
         return generateDto(email, paramMap);
-
     }
 
-    private MemberSecurityDto generateDto(String email, Map<String, Object> params) {
+    private MemberSecurityDto generateDto(String email, Map<String, Object> params){
 
         Optional<Member> result = memberRepository.findByEmail(email);
 
-        // 데이터베이스에 해당 이메일 사용자가 없다면
-        if (result.isEmpty()) {
-
-            // 회원 추가 -- mid는 이메일 주소 / 패스워드는 1111
+        //데이터베이스에 해당 이메일을 사용자가 없다면
+        if(result.isEmpty()){
+            //회원 추가 -- mid는 이메일 주소/ 패스워드는 1111
             Member member = Member.builder()
                     .mid(email)
-                    .password(passwordEncoder.encode("11111111"))
+                    .password(passwordEncoder.encode("1111"))
                     .email(email)
                     .social(true)
                     .build();
-
             member.addRole(Role.USER);
             memberRepository.save(member);
 
-            // MemberSecurityDto 구성 및 반환
-            MemberSecurityDto memberSecurityDto = new MemberSecurityDto(email, "11111111",
-                    email, false, true, Arrays.asList(new SimpleGrantedAuthority("ROLE_USER")));
-
+            //MemberSecurityDTO 구성 및 반환
+            MemberSecurityDto memberSecurityDto =
+                    new MemberSecurityDto(email, "11111111",email,false, true, Arrays.asList(new SimpleGrantedAuthority("ROLE_USER")));
             memberSecurityDto.setProps(params);
 
             return memberSecurityDto;
-
-        } else {
-
+        }else {
             Member member = result.get();
-
-            MemberSecurityDto memberSecurityDto = new MemberSecurityDto(
-                    member.getMid(),
-                    member.getPassword(),
-                    member.getEmail(),
-                    member.isDel(),
-                    member.isSocial(),
-                    member.getRoleSet().stream()
-                            .map(role -> new SimpleGrantedAuthority("ROLE_" + role.name()))
-                            .collect(Collectors.toList())
-            );
+            MemberSecurityDto memberSecurityDto =
+                    new MemberSecurityDto(
+                            member.getMid(),
+                            member.getPassword(),
+                            member.getEmail(),
+                            member.isDel(),
+                            member.isSocial(),
+                            member.getRoleSet()
+                                    .stream().map(memberRole -> new SimpleGrantedAuthority("ROLE_"+memberRole.name()))
+                                    .collect(Collectors.toList())
+                    );
 
             return memberSecurityDto;
-
         }
-
     }
 
-    private String getKakaoEmail(Map<String, Object> paramMap) {
 
-        log.info("KAKAO----------------------------------");
+    private String getKakaoEmail(Map<String, Object> paramMap){
+
+        log.info("KAKAO-----------------------------------------");
 
         Object value = paramMap.get("kakao_account");
 
@@ -126,7 +116,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         log.info("email..." + email);
 
         return email;
-
     }
 
 }

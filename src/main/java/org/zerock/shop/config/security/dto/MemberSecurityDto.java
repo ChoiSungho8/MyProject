@@ -16,33 +16,37 @@ import java.util.Map;
 public class MemberSecurityDto extends User implements OAuth2User {
 
     private String mid;
-    private String password;
+    private String mpw;
     private String email;
     private boolean del;
     private boolean social;
+    private String username;
 
-    private Map<String, Object> props; // 소셜 로그인 정보
+    private Map<String, Object> props; //소셜 로그인 정보
 
-    public MemberSecurityDto(String username, String password, boolean del, boolean social,
+    public MemberSecurityDto(String username, String password, String email, boolean del, boolean social,
                              Collection<? extends GrantedAuthority> authorities) {
-
         super(username, password, authorities);
 
         this.mid = username;
-        this.password = password;
-        this.email = username;
+        this.mpw = password;
+        this.email = email;
         this.del = del;
         this.social = social;
+        this.username = username;
 
     }
 
-    @Override
     public Map<String, Object> getAttributes() {
         return this.getProps();
     }
 
     @Override
     public String getName() {
+        return this.mid;
+    }
+
+    public String getUsername() {
         return this.mid;
     }
 

@@ -20,21 +20,24 @@ public class JWTUtil {
     @Value("${org.zerock.jwt.secret}")
     private String key;
 
-    public String generateToken(Map<String, Object> valueMap, int days) {
+    public String generateToken(Map<String, Object> valueMap, int days){
 
-        log.info("generateKey... : " + key);
+        log.info("generateKey..." + key);
 
-        // 헤더 부분
+        //헤더 부분
         Map<String, Object> headers = new HashMap<>();
-        headers.put("typ", "JWT");
-        headers.put("alg", "HS256");
+        headers.put("typ","JWT");
+        headers.put("alg","HS256");
 
-        // payload 부분 설정
+        //payload 부분 설정
         Map<String, Object> payloads = new HashMap<>();
         payloads.putAll(valueMap);
 
-        // 테스트 시에는 짧은 유효 기간
-        int time = (60 * 24) * days; // 테스트는 분단위로 나중에 60*24 (일) 단위 변경
+        //테스트 시에는 짧은 유효 기간
+        //int time = (1) * days; //테스트는 분단위로 나중에 60*24 (일)단위변경
+
+        //10분 단위로 조정
+        int time = (2) * days; //테스트는 분단위로 나중에 60*24 (일)단위변경
 
         String jwtStr = Jwts.builder()
                 .setHeader(headers)
@@ -45,10 +48,10 @@ public class JWTUtil {
                 .compact();
 
         return jwtStr;
-
     }
 
-    public Map<String, Object> validateToken(String token) throws JwtException {
+
+    public Map<String, Object> validateToken(String token)throws JwtException {
 
         Map<String, Object> claim = null;
 
@@ -56,10 +59,7 @@ public class JWTUtil {
                 .setSigningKey(key.getBytes()) // Set Key
                 .parseClaimsJws(token) // 파싱 및 검증, 실패 시 에러
                 .getBody();
-
         return claim;
-
     }
 
-}
-*/
+}*/

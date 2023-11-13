@@ -24,45 +24,43 @@ public class APILoginFilter extends AbstractAuthenticationProcessingFilter {
     }
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request,
-                                                HttpServletResponse response) throws AuthenticationException,
-            IOException, ServletException {
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
 
-        log.info("APILoginFilter------------------------------");
+        log.info("APILoginFilter-----------------------------------");
 
-        if(request.getMethod().equalsIgnoreCase("GET")) {
-
+        if (request.getMethod().equalsIgnoreCase("GET")) {
             log.info("GET METHOD NOT SUPPORT");
             return null;
-
         }
+        log.info("-----------------------------------------");
+        log.info(request.getMethod());
 
         Map<String, String> jsonData = parseRequestJSON(request);
 
-        log.info("jsonData : " + jsonData);
+        log.info("jsonData: "+jsonData);
 
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+        UsernamePasswordAuthenticationToken authenticationToken
+                = new UsernamePasswordAuthenticationToken(
                 jsonData.get("mid"),
-                jsonData.get("password"));
+                jsonData.get("mpw"));
 
         return getAuthenticationManager().authenticate(authenticationToken);
-
     }
 
-    private Map<String, String> parseRequestJSON(HttpServletRequest request) {
 
-        // JSON 데이터를 분석해서 mid, password 전달 값을 Map으로 처리
-        try(Reader reader = new InputStreamReader(request.getInputStream())) {
+    private Map<String,String> parseRequestJSON(HttpServletRequest request) {
+
+        //JSON 데이터를 분석해서 mid, mpw 전달 값을 Map으로 처리
+        try(Reader reader = new InputStreamReader(request.getInputStream())){
 
             Gson gson = new Gson();
 
             return gson.fromJson(reader, Map.class);
 
-        } catch(Exception e) {
+        }catch(Exception e){
             log.error(e.getMessage());
         }
         return null;
     }
-
 }
 */

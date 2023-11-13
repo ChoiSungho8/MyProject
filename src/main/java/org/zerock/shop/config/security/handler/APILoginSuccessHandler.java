@@ -22,34 +22,30 @@ public class APILoginSuccessHandler implements AuthenticationSuccessHandler {
     private final JWTUtil jwtUtil;
 
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request,
-                                        HttpServletResponse response,
-                                        Authentication authentication) throws IOException, ServletException {
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
 
-        log.info("Login Success Handler......................");
+        log.info("Login Success Handler................................");
 
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 
         log.info(authentication);
-        log.info(authentication.getName()); // username
+        log.info(authentication.getName()); //username
 
         Map<String, Object> claim = Map.of("mid", authentication.getName());
-        // Access Token 유효 기간 1일
+        //Access Token 유효기간 1일
         String accessToken = jwtUtil.generateToken(claim, 1);
-        // Refresh Token 유효 기간 30일
-        String refreshToken = jwtUtil.generateToken(claim, 30);
+        //Refresh Token 유효기간 30일
+        String refreshToken = jwtUtil.generateToken(claim, 10);
 
         Gson gson = new Gson();
 
-        Map<String, String> keyMap = Map.of(
+        Map<String,String> keyMap = Map.of(
                 "accessToken", accessToken,
                 "refreshToken", refreshToken);
 
         String jsonStr = gson.toJson(keyMap);
 
         response.getWriter().println(jsonStr);
-
     }
-
 }
 */
